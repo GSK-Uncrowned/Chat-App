@@ -1,0 +1,185 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    Color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.app {
+    display: flex;
+}
+
+
+/* ==========================================
+   SIDEBAR 
+   ========================================== */
+.sideBar {
+    background-color: #1e1e1e;
+    height: calc(100vh - 40px);
+    width: 100px;
+    border-radius: 20px;
+    margin: 20px 10px;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.sideBar img {
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.upperNav {
+    border-bottom: 1px solid #3A3B3C;
+    padding-bottom: 15px;
+}
+/* ========================================== */
+
+
+
+
+
+
+/* ==========================================
+   CONTACT LIST 
+   ========================================== */
+.cntcList {
+    background-color: #1e1e1e;
+    height: calc(100vh - 40px);
+    width: 550px;
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+.cntcListHeaderSpacer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cntcListHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 25px;
+    border-bottom: 1px solid #3A3B3C;
+    padding-bottom: 14px;
+}
+
+.cntcListIcn {
+    display: flex;
+    gap: 14px;
+}
+.cntcListHeader img {
+    height: 50px;
+}
+
+.cntcListHeader h1 {
+    font-size: 40px;
+    font-weight: 700;
+}
+.cntcListHeader input {
+    background-color: #3A3B3C;
+    height: 45px;
+    width: 100%;
+    font-size: 18px;
+    border-radius: 30px;
+    padding: 0px 20px;
+    border: none;
+    outline: none;
+    color: white;
+}
+/* ========================================== */
+
+
+
+
+
+
+/* ==========================================
+   MAIN CHAT WINDOW 
+   ========================================== */
+.mainChat {
+    background-color: #1e1e1e;
+    height: calc(100vh - 40px);
+    flex: 1;
+    border-radius: 20px;
+    margin: 20px 10px;
+    padding: 10px 20px 15px 20px ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chatHeader {
+    display: flex;
+    justify-content: space-between;
+    
+    border-bottom: 1px solid #3A3B3C;
+    padding: 13px 10px 15px 15px;
+}
+
+.chatHeaderLeft {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.chatHeaderLeft h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.chatHeaderRight img {
+    height: 50px;
+    margin-bottom: 7px;
+}
+
+.chatHeaderRight {
+    display: flex;
+    gap: 20px;
+}
+
+.inputSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.inputSection input {
+    background-color: #3A3B3C;
+    outline: none;
+    border: none;
+    color: white;
+    height: 45px;
+    font-size: 18px;
+    border-radius: 30px;
+    flex: 1;
+    padding: 0px 25px;
+}
+/* ========================================== */
+
+
+
+
+
+
+/* ==========================================
+   CONTACT INFO PANEL 
+   ========================================== */
+.cntcInfo {
+    background-color: #1e1e1e;
+    height: calc(100vh - 40px);
+    width: 550px;
+    border-radius: 20px;
+    margin: 20px 10px;
+    justify-content: center;
+    display: flex;
+}
+/* ========================================== */
