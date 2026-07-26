@@ -6,38 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatApp</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
     <div class="app">
         <nav class="sideBar">
             <div class="upperNav">
-                <img src="assets/icon.png">
-                <img src="assets/icon.png">
-                <img src="assets/icon.png">
-                <img src="assets/icon.png">
+                <img src="assets/icon.png" height="50px" width="50px">
+                <img src="assets/icon.png" height="50px" width="50px">
+                <img src="assets/icon.png" height="50px" width="50px">
+                <img src="assets/icon.png" height="50px" width="50px">
             </div>
             <div class="lowerNav">
-                <img src="assets/icon.png">
+                <img src="assets/icon.png" height="50px" width="50px">
                 <img src="assets/icon.png">
             </div>
         </nav>
 
         <aside class="cntcList">
-            <div class="cntcListHeader">
+            <header class="cntcListHeader">
                 <div class="cntcListHeaderSpacer">
-                    <div>
-                        <h1>Chats</h1>
-                    </div>
+                    <h1>Chats</h1>
                     <div class="cntcListIcn">
-                        <img src="assets/icon.png">
-                        <img src="assets/icon.png">
+                        <img src="assets/icon.png" height="50px" width="50px">
+                        <img src="assets/icon.png" height="50px" width="50px">
                     </div>
                 </div>
                 <div>
                     <input type="text" spellcheck="false" placeholder="Search Messages...">
                 </div>
-            </div>
+            </header>
+            <main class="cntcPeople">
+                <div class="cntcPerson">
+                    <div class="cntcPersonImg">
+                        <img src="assets/icon.png" height="60px" width="60px">
+                    </div>
+                    <div class="cntcPersonInfo">
+                        <h1>Name</h1>
+                        <p>Last Message</p>
+                    </div>
+                </div>
+            </main>
         </aside>
 
         <main class="mainChat">
@@ -47,7 +57,7 @@
                         <img src="assets/icon.png">
                     </div>
                     <div>
-                        <h1>Name</h1>
+                        <h1>Khen Weslie R. Hapis</h1>
                     </div>
                 </div>
                 <div class="chatHeaderRight">
@@ -56,25 +66,39 @@
                     <img src="assets/icon.png">
                 </div>
             </div>
+            <div class="outputSection">
+                <div class="incoming">
+                    <p>This is an incoming message.</p>
+                </div>
+                <div class="outgoing">
+                    <p>This is an outgoing message.</p>
+                </div>
+            </div>
             <div class="inputSection">
                 <input type="text" placeholder="Type a message...">
                 <img src="assets/icon.png">
             </div>
         </main>
 
-        <aside class="cntcInfo">
-            <div class="cntcInfoHeader">
-                <div class="cntcInfoHeaderupper">
-                    <img src="assets/icon.png">
-                    <h1>Test</h1>
+        <aside class="info">
+            <div class="infoHeader">
+                <div class="infoHeaderUpper">
+                    <img src="assets/icon.png" height="110px" width="110px">
+                    <h1>Khen Weslie R. Hapis</h1>
+                    <p>Active Now</p>
                 </div>
-                <div class="cntcInfoHeaderspcr">
+                <div class="infoHeaderspcr">
                     <img src="assets/icon.png">
                     <img src="assets/icon.png">
+                </div>
+            </div>
+            <div class="infoMain">
+                <div class="dropdown">
+                    <h2>Chat Members</h2>
+                    <h3>▽</h3>
                 </div>
             </div>
         </aside>
     </div>
 </body>
-
 </html>
