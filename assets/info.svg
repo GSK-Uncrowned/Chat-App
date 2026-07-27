@@ -1,0 +1,8 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer Circle Frame -->
+  <circle cx="12" cy="12" r="9" stroke="#0084FF" stroke-width="2"/>
+  <!-- Top Dot of the "i" -->
+  <circle cx="12" cy="8" r="1.25" fill="#0084FF"/>
+  <!-- Vertical Stem of the "i" -->
+  <path d="M12 11V16" stroke="#0084FF" stroke-width="2" stroke-linecap="round"/>
+</svg>

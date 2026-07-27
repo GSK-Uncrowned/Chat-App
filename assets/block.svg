@@ -1,0 +1,8 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular Background -->
+  <circle cx="18" cy="18" r="18" fill="#3A3B3C"/>
+  <!-- Outer Prohibit Circle -->
+  <circle cx="18" cy="18" r="9" stroke="#E4E6EB" stroke-width="2"/>
+  <!-- Diagonal Slash (Top-Left to Bottom-Right) -->
+  <path d="M11.636 11.636L24.364 24.364" stroke="#E4E6EB" stroke-width="2"/>
+</svg>

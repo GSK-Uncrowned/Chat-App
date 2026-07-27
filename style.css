@@ -188,7 +188,7 @@ body {
 .inputSection {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
     padding-top: 10px;
 }
 .inputSection input {
@@ -201,6 +201,10 @@ body {
     border-radius: 30px;
     flex: 1;
     padding: 0px 25px;
+}
+.inputSection img {
+    margin-bottom: 1px;
+    cursor: pointer;
 }
 /* ========================================== */
 
