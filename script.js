@@ -3,6 +3,14 @@ const sendButton = document.querySelector('.inputSection button');
 const output = document.querySelector('.outputSection');
 const rightPanel = document.querySelector('.info');
 const infoButton = document.querySelector('.actionInfo');
+const newChatButton = document.querySelector('.newChat');
+const hider = document.querySelector('.hider');
+
+newChatButton.addEventListener('click', () => {
+
+    hider.classList.toggle('show');
+});
+
 
 infoButton.addEventListener('click', () => {
     
