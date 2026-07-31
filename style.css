@@ -18,9 +18,11 @@ body {
 
 
 
-/* ==========================================
-   SIDEBAR 
-   ========================================== */
+
+/* ==========================================================================
+   2. SIDEBAR NAVIGATION
+   ========================================================================== */
+
 .sideBar {
     height: calc(125vh - 40px);
     background-color: #1e1e1e;
@@ -60,16 +62,14 @@ body {
     border-radius: 15px;
     cursor: pointer;
 }
-/* ========================================== */
-
-
 
 
 
 
 /* ==========================================
-   CONTACT LIST 
+   CONTACT LIST PANEL
    ========================================== */
+
 .cntcList {
     height: calc(125vh - 40px);
     background-color: #1e1e1e;
@@ -127,16 +127,14 @@ body {
 .cntcPersonInfo {
     margin-bottom: 10px;
 }
-/* ========================================== */
-
-
 
 
 
 
 /* ==========================================
-   MAIN CHAT WINDOW 
+   MAIN CHAT PANEL
    ========================================== */
+   
 .mainChat {
     height: calc(125vh - 40px);
     background-color: #1e1e1e;
@@ -177,6 +175,15 @@ body {
 .action {
     padding: 5px 5px;
     margin-bottom: 7px;
+}
+.actionInfo {
+    padding: 5px 5px;
+    margin-bottom: 7px;
+}
+.actionInfo:hover {
+    background-color: #3A3B3C;
+    border-radius: 15px;
+    cursor: pointer;
 }
 .action:hover {
     background-color: #3A3B3C;
@@ -237,17 +244,22 @@ body {
     transform: scale(1.1);
     cursor: pointer;
 }
-/* ========================================== */
 
 
 
 
+/* ==========================================================================
+   7. USER INFO / RIGHT SIDE PANEL
+   ========================================================================== */
 
-
-/* ==========================================
-   CONTACT INFO PANEL 
-   ========================================== */
 .info {
+display: none;
+}
+.info.show {
+    display: block;
+}
+.infoCont{
+    height: calc(125vh - 40px);
     background-color: #1e1e1e;
     width: 550px;
     border-radius: 20px;
@@ -289,4 +301,3 @@ body {
 .dropdown:hover {
     background-color: #3A3B3C;
 }
-/* ========================================== */

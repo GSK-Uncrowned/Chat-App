@@ -1,6 +1,13 @@
 const input = document.querySelector ('.inputSection input');
 const sendButton = document.querySelector('.inputSection button');
 const output = document.querySelector('.outputSection');
+const rightPanel = document.querySelector('.info');
+const infoButton = document.querySelector('.actionInfo');
+
+infoButton.addEventListener('click', () => {
+    
+    rightPanel.classList.toggle('show');
+});
 
 sendButton.addEventListener('click', () => {
 
@@ -15,7 +22,7 @@ sendButton.addEventListener('click', () => {
 
     output.appendChild(div);
     div.appendChild(p);
-    p.textContent = input.value;
+    p.textContent = message;
 
     input.value = '';
 });
