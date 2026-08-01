@@ -5,17 +5,10 @@ const rightPanel = document.querySelector('.info');
 const infoButton = document.querySelector('.actionInfo');
 const newChatButton = document.querySelector('.newChat');
 const hider = document.querySelector('.hider');
-
-newChatButton.addEventListener('click', () => {
-
-    hider.classList.toggle('show');
-});
-
-
-infoButton.addEventListener('click', () => {
-    
-    rightPanel.classList.toggle('show');
-});
+const closeButton = document.querySelector('.closeButton');
+const nameInput = document.querySelector('.nameInput');
+const joinChatButton = document.querySelector('.joinChatButton');
+const nameOutput = document.querySelector('.nameOutput');
 
 sendButton.addEventListener('click', () => {
 
@@ -33,4 +26,36 @@ sendButton.addEventListener('click', () => {
     p.textContent = message;
 
     input.value = '';
+});
+
+newChatButton.addEventListener('click', () => {
+
+    hider.classList.toggle('show');
+});
+
+closeButton.addEventListener('click', () => {
+    hider.classList.remove('show');
+});
+
+infoButton.addEventListener('click', () => {
+    
+    rightPanel.classList.toggle('show');
+});
+
+joinChatButton.addEventListener('click', () => {
+
+    const name = nameInput.value.trim();
+    if (nameInput.value ==='') return;
+
+    if (nameOutput) {
+        nameOutput.textContent = name;
+    }
+    else {
+    const h1 = document.createElement('h1');
+    h1.textContent = name;
+    nameOutput.appendChild(h1);
+    }
+
+    nameInput.value = '';
+    hider.classList.remove('show');
 });
