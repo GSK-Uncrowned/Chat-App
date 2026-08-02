@@ -45,7 +45,7 @@ infoButton.addEventListener('click', () => {
 joinChatButton.addEventListener('click', () => {
 
     const name = nameInput.value.trim();
-    if (nameInput.value ==='') return;
+    if (name === '') return;
 
     if (nameOutput) {
         nameOutput.textContent = name;
@@ -58,4 +58,30 @@ joinChatButton.addEventListener('click', () => {
 
     nameInput.value = '';
     hider.classList.remove('show');
+
+    const nameOutputt = document.querySelector('.cntcPeople');
+
+    const tatay = document.createElement('div');
+    tatay.className = "cntcPerson";
+
+    const pic = document.createElement('img');
+    pic.src = "assets/profile.svg";
+    pic.className = "cntcPersonImg";
+
+    const papa = document.createElement('div');
+    papa.className = "cntcPersonInfo";
+
+    const pangalan = document.createElement('h1');
+    pangalan.textContent = name;
+
+    const prev = document.createElement('p');
+    prev.textContent = "Start Messaging";
+
+    papa.appendChild(pangalan);
+    papa.appendChild(prev);
+
+    tatay.appendChild(pic);
+    tatay.appendChild(papa);
+
+    nameOutputt.appendChild(tatay);
 });

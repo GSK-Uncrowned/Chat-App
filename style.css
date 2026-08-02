@@ -14,7 +14,6 @@ body {
     display: flex;
     gap: 20px;
     padding: 20px 20px;
-    overflow-x: hidden;
 }
 
 
@@ -75,6 +74,8 @@ body {
     background-color: #1e1e1e;
     flex: 1;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
 }
 .cntcListHeaderSpacer {
     display: flex;
@@ -112,6 +113,13 @@ body {
     outline: none;
     color: white;
 }
+.cntcPeople {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
 .cntcPerson {
     display: flex;
     align-items: center;
@@ -126,6 +134,10 @@ body {
 }
 .cntcPersonInfo {
     margin-bottom: 10px;
+}
+.cntcPersonImg {
+    height: 60px;
+    width: 60px;
 }
 
 
