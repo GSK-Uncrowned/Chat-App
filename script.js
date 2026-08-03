@@ -9,7 +9,6 @@ const closeButton = document.querySelector('.closeButton');
 const nameInput = document.querySelector('.nameInput');
 const joinChatButton = document.querySelector('.joinChatButton');
 const nameOutput = document.querySelector('.nameOutput');
-const like = document.querySelector('assets/like.svg');
 
 function sendMessage() {
 
@@ -31,6 +30,7 @@ function sendMessage() {
 
 input.addEventListener('keydown',(e) => {
     if (e.key=== 'Enter') sendMessage()
+
 });
 
 newChatButton.addEventListener('click', () => {
@@ -47,7 +47,7 @@ infoButton.addEventListener('click', () => {
     rightPanel.classList.toggle('show');
 });
 
-joinChatButton.addEventListener('click', () => {
+    joinChatButton.addEventListener('click', () => {
 
     const name = nameInput.value.trim();
     if (name === '') return;
