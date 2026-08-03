@@ -9,8 +9,9 @@ const closeButton = document.querySelector('.closeButton');
 const nameInput = document.querySelector('.nameInput');
 const joinChatButton = document.querySelector('.joinChatButton');
 const nameOutput = document.querySelector('.nameOutput');
+const like = document.querySelector('assets/like.svg');
 
-sendButton.addEventListener('click', () => {
+function sendMessage() {
 
     const message = input.value.trim();
 
@@ -26,6 +27,10 @@ sendButton.addEventListener('click', () => {
     p.textContent = message;
 
     input.value = '';
+}
+
+input.addEventListener('keydown',(e) => {
+    if (e.key=== 'Enter') sendMessage()
 });
 
 newChatButton.addEventListener('click', () => {
@@ -47,15 +52,6 @@ joinChatButton.addEventListener('click', () => {
     const name = nameInput.value.trim();
     if (name === '') return;
 
-    if (nameOutput) {
-        nameOutput.textContent = name;
-    }
-    else {
-    const h1 = document.createElement('h1');
-    h1.textContent = name;
-    nameOutput.appendChild(h1);
-    }
-
     nameInput.value = '';
     hider.classList.remove('show');
 
@@ -73,6 +69,7 @@ joinChatButton.addEventListener('click', () => {
 
     const pangalan = document.createElement('h1');
     pangalan.textContent = name;
+    pangalan.className = "cntcPersonName";
 
     const prev = document.createElement('p');
     prev.textContent = "Start Messaging";
@@ -96,5 +93,9 @@ cntcPeople.addEventListener('click', (e) => {
     allContact.forEach((person) => {
         person.classList.remove('active');
     });
+
+    const contactName = contact.querySelector('.cntcPersonName').textContent;
+    nameOutput.textContent = contactName;
+
     contact.classList.add('active');
 });
