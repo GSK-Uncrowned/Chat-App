@@ -85,3 +85,16 @@ joinChatButton.addEventListener('click', () => {
 
     nameOutputt.appendChild(tatay);
 });
+
+const cntcPeople = document.querySelector('.cntcPeople');
+
+cntcPeople.addEventListener('click', (e) => {
+    const contact = e.target.closest('.cntcPerson');
+    if (!contact) return;
+
+    const allContact = document.querySelectorAll('.cntcPerson');
+    allContact.forEach((person) => {
+        person.classList.remove('active');
+    });
+    contact.classList.add('active');
+});
