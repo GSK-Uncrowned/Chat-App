@@ -47,7 +47,7 @@ infoButton.addEventListener('click', () => {
     rightPanel.classList.toggle('show');
 });
 
-    joinChatButton.addEventListener('click', () => {
+function senddMessage() {
 
     const name = nameInput.value.trim();
     if (name === '') return;
@@ -81,6 +81,10 @@ infoButton.addEventListener('click', () => {
     tatay.appendChild(papa);
 
     nameOutputt.appendChild(tatay);
+}
+
+nameInput.addEventListener('keydown',(e) => {
+    if (e.key=== 'Enter') senddMessage()
 });
 
 const cntcPeople = document.querySelector('.cntcPeople');
@@ -98,4 +102,18 @@ cntcPeople.addEventListener('click', (e) => {
     nameOutput.textContent = contactName;
 
     contact.classList.add('active');
+});
+
+const likee = document.querySelector('.likee');
+
+likee.addEventListener('click', () => {
+
+    const bubble = document.createElement('div');
+    bubble.className = "outgoing";
+
+    const likee = document.createElement('img');
+    likee.src = "assets/like.svg";
+
+    output.appendChild(bubble);
+    bubble.appendChild(likee);
 });

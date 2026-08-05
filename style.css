@@ -152,6 +152,7 @@ body {
    ========================================== */
 
 .mainChat {
+    height: calc(125vh - 40px);
     background-color: #1e1e1e;
     flex: 2;
     border-radius: 20px;

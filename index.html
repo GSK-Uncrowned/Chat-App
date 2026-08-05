@@ -2,11 +2,14 @@
 <html lang="en">
 
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatApp</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js" defer></script>
+
 </head>
 
 <body>
@@ -35,7 +38,7 @@
                     </div>
                 </div>
                 <div>
-                    <input type="text" spellcheck="false" placeholder="Search Messages...">
+                    <input type="search" spellcheck="false" placeholder="Search Messages...">
                 </div>
             </header>
             <main class="cntcPeople">
@@ -61,7 +64,7 @@
             </div>
             <div class="inputSection">
                 <input type="text" placeholder="Type a message...">
-                <button><img src="assets/like.svg" height="40px" width="40px"></button>
+                <button class="likee"><img src="assets/like.svg" height="40px" width="40px"></button>
             </div>
         </main>
 
@@ -86,11 +89,10 @@
         </aside>
 
         <div class="hider">
-        <div class="joinChat">
-            <button class="closeButton">X</button>
-            <input type="text" placeholder="Enter your name..." class="nameInput">
-            <button class="joinChatButton">Join Chat</button>
-        </div>
+            <div class="joinChat">
+                <button class="closeButton">X</button>
+                <input type="text" placeholder="Enter your name..." class="nameInput">
+            </div>
         </div>
 
     </div>
