@@ -1,58 +1,46 @@
-const input = document.querySelector ('.inputSection input');
-const sendButton = document.querySelector('.inputSection button');
-const output = document.querySelector('.outputSection');
-const rightPanel = document.querySelector('.info');
-const infoButton = document.querySelector('.actionInfo');
-const newChatButton = document.querySelector('.newChat');
-const hider = document.querySelector('.hider');
-const closeButton = document.querySelector('.closeButton');
-const nameInput = document.querySelector('.nameInput');
-const joinChatButton = document.querySelector('.joinChatButton');
-const nameOutput = document.querySelector('.nameOutput');
-
 function sendMessage() {
+    const input = document.querySelector('.inputSection input');
+    const output = document.querySelector('.outputSection');
 
     const message = input.value.trim();
-
-    if (input.value ==='') return;
+    if (message === '') return;
 
     const div = document.createElement('div');
-    div.className = "outgoing";
-
+    div.className = 'outgoing';
     const p = document.createElement('p');
-
     output.appendChild(div);
     div.appendChild(p);
     p.textContent = message;
-
     input.value = '';
 }
 
-input.addEventListener('keydown',(e) => {
-    if (e.key=== 'Enter') sendMessage()
-
+document.querySelector('.inputSection input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendMessage();
 });
 
-newChatButton.addEventListener('click', () => {
-
+document.querySelector('.newChat').addEventListener('click', () => {
+    const hider = document.querySelector('.hider');
     hider.classList.toggle('show');
 });
 
-closeButton.addEventListener('click', () => {
+document.querySelector('.closeButton').addEventListener('click', () => {
+    const hider = document.querySelector('.hider');
     hider.classList.remove('show');
 });
 
-infoButton.addEventListener('click', () => {
-    
+document.querySelector('.actionInfo').addEventListener('click', () => {
+    const rightPanel = document.querySelector('.info');
     rightPanel.classList.toggle('show');
 });
 
 function senddMessage() {
 
+    const nameInput = document.querySelector('.nameInput');
     const name = nameInput.value.trim();
     if (name === '') return;
 
     nameInput.value = '';
+    const hider = document.querySelector('.hider');
     hider.classList.remove('show');
 
     const nameOutputt = document.querySelector('.cntcPeople');
@@ -83,13 +71,11 @@ function senddMessage() {
     nameOutputt.appendChild(tatay);
 }
 
-nameInput.addEventListener('keydown',(e) => {
-    if (e.key=== 'Enter') senddMessage()
+document.querySelector('.nameInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') senddMessage();
 });
 
-const cntcPeople = document.querySelector('.cntcPeople');
-
-cntcPeople.addEventListener('click', (e) => {
+document.querySelector('.cntcPeople').addEventListener('click', (e) => {
     const contact = e.target.closest('.cntcPerson');
     if (!contact) return;
 
@@ -99,21 +85,18 @@ cntcPeople.addEventListener('click', (e) => {
     });
 
     const contactName = contact.querySelector('.cntcPersonName').textContent;
+    const nameOutput = document.querySelector('.nameOutput');
     nameOutput.textContent = contactName;
 
     contact.classList.add('active');
 });
 
-const likee = document.querySelector('.likee');
-
-likee.addEventListener('click', () => {
-
+document.querySelector('.likee').addEventListener('click', () => {
+    const output = document.querySelector('.outputSection');
     const bubble = document.createElement('div');
-    bubble.className = "outgoing";
-
+    bubble.className = 'outgoing';
     const likee = document.createElement('img');
-    likee.src = "assets/like.svg";
-
+    likee.src = 'assets/like.svg';
     output.appendChild(bubble);
     bubble.appendChild(likee);
 });
