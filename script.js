@@ -2,11 +2,31 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 const supabaseClient = createClient('https://mflwqmpfqdwscyxkdpfi.supabase.co', "sb_publishable_JVvk1dxs_aY3JydW6N_JfQ_tKcf1_RG");
 
-async function sendMessage() {
-    const {data, error} = await supabaseClient
+async function loadMessages () {
+    const {data: messages, error} = await supabaseClient
     .from('chat')
-    .select('message, created_at')
+    .select('*')
     .order('created_at', { ascending: true });
+
+    if (error) {
+        alert('Error loading messages: ' + error.message);
+        return;
+    }
+
+    messages.forEach((message) => {
+        const output = document.querySelector('.outputSection');
+        const div = document.createElement('div');
+        div.className = 'outgoing';
+        const p = document.createElement('p');
+        output.appendChild(div);
+        div.appendChild(p);
+        p.textContent = message.text;
+    })
+}
+
+loadMessages();
+
+async function sendMessage() {
 
     const input = document.querySelector('.inputSection input');
     const output = document.querySelector('.outputSection');
@@ -22,16 +42,12 @@ async function sendMessage() {
     p.textContent = message;
     input.value = '';
 
-    const {data, error} = await supabaseClient
+    const {data: insertText, error: insertError} = await supabaseClient
     .from('chat')
     .insert([{text: message}]);
 
-    if (error) {
-        alert('Error inserting message: ' + error.message);
-    }
-
-    if (data) {
-        alert('Message sent successfully!');
+    if (insertError) {
+        alert('Error inserting message: ' + insertError.message);
     }
 }
 
