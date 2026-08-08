@@ -225,7 +225,7 @@ body {
 .outgoing {
     background-color: #3A3B3C;
     align-self: flex-end;
-    padding: 10px 15px;
+    padding: 10px 15px 13px 15px;
     width: fit-content;
     border-radius: 40px;
     font-size: 20px;
@@ -319,6 +319,8 @@ display: none;
 .dropdown:hover {
     background-color: #3A3B3C;
 }
+
+
 
 
 

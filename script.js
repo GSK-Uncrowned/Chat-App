@@ -1,4 +1,13 @@
-function sendMessage() {
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+const supabaseClient = createClient('https://mflwqmpfqdwscyxkdpfi.supabase.co', "sb_publishable_JVvk1dxs_aY3JydW6N_JfQ_tKcf1_RG");
+
+async function sendMessage() {
+    const {data, error} = await supabaseClient
+    .from('chat')
+    .select('message, created_at')
+    .order('created_at', { ascending: true });
+
     const input = document.querySelector('.inputSection input');
     const output = document.querySelector('.outputSection');
 
@@ -12,6 +21,18 @@ function sendMessage() {
     div.appendChild(p);
     p.textContent = message;
     input.value = '';
+
+    const {data, error} = await supabaseClient
+    .from('chat')
+    .insert([{text: message}]);
+
+    if (error) {
+        alert('Error inserting message: ' + error.message);
+    }
+
+    if (data) {
+        alert('Message sent successfully!');
+    }
 }
 
 document.querySelector('.inputSection input').addEventListener('keydown', (e) => {
