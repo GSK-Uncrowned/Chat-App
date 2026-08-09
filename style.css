@@ -207,11 +207,14 @@ body {
     border-radius: 15px;
     cursor: pointer;
 }
+.heli {
+    flex: 1;
+}
 .outputSection {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    flex: 1;
+    height: 100%;
     overflow-y: auto;
 }
 .incoming {

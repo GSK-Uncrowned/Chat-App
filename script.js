@@ -1,7 +1,12 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
 const supabaseClient = createClient('https://mflwqmpfqdwscyxkdpfi.supabase.co', "sb_publishable_JVvk1dxs_aY3JydW6N_JfQ_tKcf1_RG");
 
+
+const output = document.querySelector('.outputSection');
+
+/*====================================================================
+   Load messages from Supabase and display them in the output section 
+  ====================================================================*/
 async function loadMessages () {
     const {data: messages, error} = await supabaseClient
     .from('chat')
@@ -14,7 +19,6 @@ async function loadMessages () {
     }
 
     messages.forEach((message) => {
-        const output = document.querySelector('.outputSection');
         const div = document.createElement('div');
         div.className = 'outgoing';
         const p = document.createElement('p');
@@ -23,13 +27,15 @@ async function loadMessages () {
         p.textContent = message.text;
     })
 }
-
 loadMessages();
 
+
+/*=====================================================================
+   Function to send a message and insert it into the Supabase database
+  =====================================================================*/
 async function sendMessage() {
 
     const input = document.querySelector('.inputSection input');
-    const output = document.querySelector('.outputSection');
 
     const message = input.value.trim();
     if (message === '') return;
@@ -50,27 +56,24 @@ async function sendMessage() {
         alert('Error inserting message: ' + insertError.message);
     }
 }
-
 document.querySelector('.inputSection input').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') sendMessage();
 });
 
-document.querySelector('.newChat').addEventListener('click', () => {
-    const hider = document.querySelector('.hider');
-    hider.classList.toggle('show');
+document.querySelector('.likee').addEventListener('click', () => {
+    const bubble = document.createElement('div');
+    bubble.className = 'outgoing';
+    const likee = document.createElement('img');
+    likee.src = 'assets/like.svg';
+    output.appendChild(bubble);
+    bubble.appendChild(likee);
 });
 
-document.querySelector('.closeButton').addEventListener('click', () => {
-    const hider = document.querySelector('.hider');
-    hider.classList.remove('show');
-});
 
-document.querySelector('.actionInfo').addEventListener('click', () => {
-    const rightPanel = document.querySelector('.info');
-    rightPanel.classList.toggle('show');
-});
-
-function senddMessage() {
+/*==============================================================================
+   Function to display the contact name and profile picture in the contact list
+  ==============================================================================*/
+async function createContact() {
 
     const nameInput = document.querySelector('.nameInput');
     const name = nameInput.value.trim();
@@ -107,11 +110,14 @@ function senddMessage() {
 
     nameOutputt.appendChild(tatay);
 }
-
 document.querySelector('.nameInput').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') senddMessage();
+    if (e.key === 'Enter') createContact();
 });
 
+
+/*====================================================================
+                 Highlighting the selected contact
+====================================================================*/
 document.querySelector('.cntcPeople').addEventListener('click', (e) => {
     const contact = e.target.closest('.cntcPerson');
     if (!contact) return;
@@ -128,12 +134,21 @@ document.querySelector('.cntcPeople').addEventListener('click', (e) => {
     contact.classList.add('active');
 });
 
-document.querySelector('.likee').addEventListener('click', () => {
-    const output = document.querySelector('.outputSection');
-    const bubble = document.createElement('div');
-    bubble.className = 'outgoing';
-    const likee = document.createElement('img');
-    likee.src = 'assets/like.svg';
-    output.appendChild(bubble);
-    bubble.appendChild(likee);
+
+/*====================================================================
+   Toggle the visibility of the new chat form and the right panel
+  ====================================================================*/
+document.querySelector('.newChat').addEventListener('click', () => {
+    const hider = document.querySelector('.hider');
+    hider.classList.toggle('show');
+});
+
+document.querySelector('.closeButton').addEventListener('click', () => {
+    const hider = document.querySelector('.hider');
+    hider.classList.remove('show');
+});
+
+document.querySelector('.actionInfo').addEventListener('click', () => {
+    const rightPanel = document.querySelector('.info');
+    rightPanel.classList.toggle('show');
 });
