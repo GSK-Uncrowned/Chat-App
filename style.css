@@ -125,6 +125,10 @@ body {
 .cntcPerson.active {
     background-color: #3A3B3C;
 }
+.cntcPerson.active:hover {
+    background-color: #404142;
+    cursor: pointer;
+}
 .cntcPerson {
     display: flex;
     align-items: center;
@@ -134,7 +138,7 @@ body {
     border-radius: 20px;
 }
 .cntcPerson:hover {
-    background-color: #3A3B3C;
+    background-color: #313131;
     cursor: pointer;
 }
 .cntcPersonInfo {
