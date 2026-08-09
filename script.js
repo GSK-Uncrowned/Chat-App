@@ -3,15 +3,20 @@ const supabaseClient = createClient('https://mflwqmpfqdwscyxkdpfi.supabase.co', 
 
 
 const output = document.querySelector('.outputSection');
+const container = document.querySelector('.cntcPeople');
+
+let activeContact = null;
 
 /*====================================================================
    Load messages from Supabase and display them in the output section 
   ====================================================================*/
-async function loadMessages () {
+async function loadMessages (contactId) {
+    output.innerHTML = '';
     const {data: messages, error} = await supabaseClient
     .from('chat')
     .select('*')
-    .order('created_at', { ascending: true });
+    .order('created_at', { ascending: true })
+    .eq('contact_id', contactId);
 
     if (error) {
         alert('Error loading messages: ' + error.message);
@@ -27,14 +32,16 @@ async function loadMessages () {
         p.textContent = message.text;
     })
 }
-loadMessages();
 
 
 /*=====================================================================
    Function to send a message and insert it into the Supabase database
   =====================================================================*/
 async function sendMessage() {
-
+    if (!activeContact) {
+        alert('Please select a contact first.');
+        return;
+    }
     const input = document.querySelector('.inputSection input');
 
     const message = input.value.trim();
@@ -50,7 +57,10 @@ async function sendMessage() {
 
     const {data: insertText, error: insertError} = await supabaseClient
     .from('chat')
-    .insert([{text: message}]);
+    .insert([{
+        text: message,
+        contact_id: activeContact
+    }]);
 
     if (insertError) {
         alert('Error inserting message: ' + insertError.message);
@@ -73,6 +83,36 @@ document.querySelector('.likee').addEventListener('click', () => {
 /*==============================================================================
    Function to display the contact name and profile picture in the contact list
   ==============================================================================*/
+async function loadContacts(contactId) {
+    const {data, error} = await supabaseClient
+    .from('contacts')
+    .select('*')
+    .order('created_at', { ascending: true })
+
+    if (error) {
+        alert('Error loading contacts: ' + error.message);
+        return;
+    }
+
+    data.forEach((contact) => {
+    const tatay = document.createElement('div');
+    tatay.className = "cntcPerson";
+
+    tatay.dataset.contactId = contact.id;
+
+    tatay.innerHTML = `
+        <img src="assets/profile.svg" class="cntcPersonImg">
+        <div class="cntcPersonInfo">
+            <h1 class="cntcPersonName">${contact.name}</h1>
+            <p>Start a new chat</p>
+        </div>
+    `
+    container.appendChild(tatay);
+    });
+}
+loadContacts();
+
+
 async function createContact() {
 
     const nameInput = document.querySelector('.nameInput');
@@ -83,32 +123,25 @@ async function createContact() {
     const hider = document.querySelector('.hider');
     hider.classList.remove('show');
 
-    const nameOutputt = document.querySelector('.cntcPeople');
+    const {data, error} = await supabaseClient
+    .from('contacts')
+    .insert([{name: name}])
+    .select();
 
     const tatay = document.createElement('div');
     tatay.className = "cntcPerson";
 
-    const pic = document.createElement('img');
-    pic.src = "assets/profile.svg";
-    pic.className = "cntcPersonImg";
+    tatay.dataset.contactId = data[0].id;
 
-    const papa = document.createElement('div');
-    papa.className = "cntcPersonInfo";
+    tatay.innerHTML = `
+        <img src="assets/profile.svg" class="cntcPersonImg">
+        <div class="cntcPersonInfo">
+            <h1 class="cntcPersonName">${data[0].name}</h1>
+            <p>Start a new chat</p>
+        </div>
+    `
 
-    const pangalan = document.createElement('h1');
-    pangalan.textContent = name;
-    pangalan.className = "cntcPersonName";
-
-    const prev = document.createElement('p');
-    prev.textContent = "Start Messaging";
-
-    papa.appendChild(pangalan);
-    papa.appendChild(prev);
-
-    tatay.appendChild(pic);
-    tatay.appendChild(papa);
-
-    nameOutputt.appendChild(tatay);
+    container.appendChild(tatay);
 }
 document.querySelector('.nameInput').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') createContact();
@@ -132,6 +165,10 @@ document.querySelector('.cntcPeople').addEventListener('click', (e) => {
     nameOutput.textContent = contactName;
 
     contact.classList.add('active');
+
+    activeContact = contact.dataset.contactId;
+
+    loadMessages(activeContact);
 });
 
 
