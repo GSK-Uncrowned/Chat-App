@@ -7,13 +7,17 @@ const container = document.querySelector('.cntcPeople');
 
 let activeContact = null;
 
+function scrollOutputToBottom() {
+    output.scrollTop = output.scrollHeight;
+}
+
 /*====================================================================
    Load messages from Supabase and display them in the output section 
   ====================================================================*/
 async function loadMessages (contactId) {
     output.innerHTML = '';
     const {data: messages, error} = await supabaseClient
-    .from('chat')
+    .from('chats')
     .select('*')
     .order('created_at', { ascending: true })
     .eq('contact_id', contactId);
@@ -30,7 +34,9 @@ async function loadMessages (contactId) {
         output.appendChild(div);
         div.appendChild(p);
         p.textContent = message.text;
-    })
+    });
+
+    scrollOutputToBottom();
 }
 
 
@@ -54,9 +60,10 @@ async function sendMessage() {
     div.appendChild(p);
     p.textContent = message;
     input.value = '';
+    scrollOutputToBottom();
 
     const {data: insertText, error: insertError} = await supabaseClient
-    .from('chat')
+    .from('chats')
     .insert([{
         text: message,
         contact_id: activeContact
@@ -77,6 +84,7 @@ document.querySelector('.likee').addEventListener('click', () => {
     likee.src = 'assets/like.svg';
     output.appendChild(bubble);
     bubble.appendChild(likee);
+    scrollOutputToBottom();
 });
 
 
