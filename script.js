@@ -40,9 +40,9 @@ async function loadMessages (contactId) {
 }
 
 
-/*=====================================================================
+/*====================================================================
    Function to send a message and insert it into the Supabase database
-  =====================================================================*/
+  ====================================================================*/
 async function sendMessage() {
     if (!activeContact) {
         alert('Please select a contact first.');
