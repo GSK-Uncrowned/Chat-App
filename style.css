@@ -6,17 +6,26 @@
 }
 
 body {
-    background-color: black;
-    Color: white;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     zoom: 0.8;
 }
+
 .app {
+    Color: white;
+    background-color: black;
     display: flex;
     gap: 20px;
-    padding: 20px 20px;
+    padding: 20px 0 20px 20px;
 }
 
+.auth {
+    background-image: url('assets/wallpaper.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* Optional: keeps background still while scrolling */
+    color: white;
+}
 
 
 
@@ -34,11 +43,12 @@ body {
     justify-content: space-between;
     align-content: center;
     padding: 15px 20px 0px 20px;
-    
 }
+
 .sideBar img {
     margin: 10px 10px;
 }
+
 .upperNav {
     border-bottom: 1px solid #3A3B3C;
     display: flex;
@@ -46,6 +56,7 @@ body {
     align-items: center;
     gap: 10px;
 }
+
 .lowerNav {
     padding: 20px;
     display: flex;
@@ -53,16 +64,19 @@ body {
     align-items: center;
     gap: 5px;
 }
+
 .chickenNugget:hover {
     background-color: #3A3B3C;
     border-radius: 15px;
     cursor: pointer;
 }
+
 .mrKhen:hover {
     background-color: #3A3B3C;
     border-radius: 15px;
     cursor: pointer;
 }
+
 
 
 
@@ -80,11 +94,13 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 .cntcListHeaderSpacer {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .cntcListHeader {
     display: flex;
     flex-direction: column;
@@ -93,10 +109,12 @@ body {
     border-bottom: 1px solid #3A3B3C;
     padding-bottom: 14px;
 }
+
 .cntcListIcn {
     display: flex;
     gap: 14px;
 }
+
 .cntcListIcn img:hover {
     cursor: pointer;
     transform: scale(1.1);
@@ -105,6 +123,7 @@ body {
     font-size: 40px;
     font-weight: 700;
 }
+
 .cntcListHeader input {
     background-color: #3A3B3C;
     height: 45px;
@@ -116,6 +135,7 @@ body {
     outline: none;
     color: white;
 }
+
 .cntcPeople {
     flex: 1;
     min-height: 0;
@@ -125,14 +145,17 @@ body {
     justify-content: flex-start;
     gap: 5px;
 }
+
 .cntcPerson.active {
     background-color: #3A3B3C;
     color: white;
 }
+
 .cntcPerson.active:hover {
     background-color: #404142;
     cursor: pointer;
 }
+
 .cntcPerson {
     display: flex;
     align-items: center;
@@ -142,13 +165,16 @@ body {
     border-radius: 20px;
     color: rgb(214, 214, 214);
 }
+
 .cntcPerson:hover {
     background-color: #313131;
     cursor: pointer;
 }
+
 .cntcPersonInfo {
     margin-bottom: 10px;
 }
+
 .cntcPersonImg {
     height: 60px;
     width: 60px;
@@ -172,22 +198,26 @@ body {
     justify-content: space-between;
     gap: 1;
 }
+
 .chatHeader {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #3A3B3C;
     padding: 7px 10px 7px 10px;
 }
+
 .chatHeaderLeft {
     display: flex;
     gap: 10px;
     align-items: center;
 }
+
 .chatHeaderLeft:hover {
     background-color: #3A3B3C;
     border-radius: 15px;
     cursor: pointer;
 }
+
 .nameOutput {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-weight: 500;
@@ -195,33 +225,40 @@ body {
     font-size: 25px;
     padding: 10px 10px;
 }
+
 .chatHeaderRight {
     display: flex;
     gap: 20px;
 }
+
 .action {
     padding: 5px 5px;
     margin-bottom: 7px;
 }
+
 .actionInfo {
     padding: 5px 5px;
     margin-bottom: 7px;
 }
+
 .actionInfo:hover {
     background-color: #3A3B3C;
     border-radius: 15px;
     cursor: pointer;
 }
+
 .action:hover {
     background-color: #3A3B3C;
     border-radius: 15px;
     cursor: pointer;
 }
+
 .heli {
     flex: 1;
     min-height: 0;
     display: flex;
 }
+
 .outputSection {
     flex: 1;
     display: flex;
@@ -230,10 +267,12 @@ body {
     overflow-y: auto;
     gap: 30px;
 }
+
 .outputSection::before {
     content: "";
     margin-top: auto;
 }
+
 .incoming {
     background-color: #3A3B3C;
     padding: 10px 15px;
@@ -242,6 +281,7 @@ body {
     font-size: 20px;
     margin: 0 20px;
 }
+
 .outgoing {
     background-color: #3A3B3C;
     align-self: flex-end;
@@ -250,12 +290,14 @@ body {
     border-radius: 40px;
     font-size: 20px;
 }
+
 .inputSection {
     display: flex;
     align-items: center;
     gap: 15px;
     padding-top: 10px;
 }
+
 .inputSection input {
     background-color: #3A3B3C;
     outline: none;
@@ -267,15 +309,18 @@ body {
     flex: 1;
     padding: 0px 25px;
 }
+
 .inputSection img {
     margin-bottom: 4px;
     cursor: pointer;
 }
+
 .inputSection button {
     background-color: transparent;
     border: none;
     outline: none;
 }
+
 .inputSection button:hover {
     transform: scale(1.1);
     cursor: pointer;
@@ -291,12 +336,13 @@ body {
 .info {
 display: none;
 }
+
 .info.show {
     display: block;
     flex: 0.8;   ;
 }
+
 .infoCont{
-    
     height: calc(125vh - 40px);
     min-height: 0;
     background-color: #1e1e1e;
@@ -305,6 +351,7 @@ display: none;
     flex-direction: column;
     justify-content: flex-start;
 }
+
 .infoHeader {
     display: flex;
     flex-direction: column;
@@ -312,21 +359,26 @@ display: none;
     align-items: center;
     margin: 50px 0 0 0;
 }
+
 .infoHeader img {
     margin-bottom: 20px;
 }
+
 .infoHeader p {
     margin-bottom: 20px;
 }
+
 .infoHeaderspcr {
     display: flex;
     gap: 15px;
     padding: 10px;
 }
+
 .infoHeaderspcr img:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
+
 .dropdown {
     display: flex;
     align-items: center;
@@ -336,6 +388,7 @@ display: none;
     border-radius: 10px;
     cursor: pointer;
 }
+
 .dropdown:hover {
     background-color: #3A3B3C;
 }
@@ -347,6 +400,7 @@ display: none;
 .hider {
     display: none;
 }
+
 .hider.show {
     position: fixed;
     inset: 0;
@@ -356,6 +410,7 @@ display: none;
     z-index: 1000;
     background: rgba(0, 0, 0, 0.35);
 }
+
 .joinChat {
     position: fixed;
     top: 50%;
@@ -365,6 +420,7 @@ display: none;
     padding: 20px;
     border-radius: 20px;
 }
+
 .joinChat input {
     background-color: #1e1e1e;
     border: none;
@@ -373,6 +429,7 @@ display: none;
     padding: 10px 15px;
     border-radius: 10px;
 }
+
 .joinChat button {
     background-color: #1e1e1e;
     border: none;
@@ -382,10 +439,12 @@ display: none;
     border-radius: 10px;
     margin-left: 10px;
 }
+
 .joinChat button:hover {
     background-color: #2e2e2e;
     cursor: pointer;
 }
+
 .closeButton {
     position: absolute;
     top: -10px;
@@ -401,48 +460,63 @@ display: none;
 }
 
 
+
 /* ==========================================================================
    Auth
    ========================================================================== */
 
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 .authModal {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1000;
-    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 20px;
+    justify-content: center;
+    height: 600px;
+    width: 400px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 60px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+
+/* ==========================================================================
+   Mac Larp
+   ========================================================================== */
+.cntrl {
     display: flex;
-    flex-direction: column;
-    background-color: #3A3B3C;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 20px 20px 0 0;
 }
-.authModal input {
-    background-color: #3A3B3C;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 10px;
+.esc {
+    background-color: #FF605C;
+    display: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
 }
-.authModal button {
-    background-color: #3A3B3C;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 10px;
+.full {
+    background-color: #FFBD44;
+    display: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%; 
 }
-.authModal button:hover {
-    background-color: #2e2e2e;
-    cursor: pointer;
+.min {
+    background-color: #00CA4E;
+    display: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%; 
 }
-.link {
-    color: #1e90ff;
+#mimi p {
+    color: transparent;
 }
