@@ -470,21 +470,61 @@ display: none;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     justify-content: center;
-    height: 600px;
-    width: 400px;
     padding: 20px;
+}
+.formCustom {
+    display: flex;
+    flex-direction: column;
+}
+.formCustom input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 15px;
+    padding: 10px 15px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+    height: 60px;
+    width: 500px;
+    padding: 25px;
+}
+.formCustom button {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    outline: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 999px;
+    height: 60px;
+    width: 500px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.formCustom button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .kupal {
     font-size: 60px;
     font-weight: 700;
     margin-bottom: 20px;
+    text-align: center;
 }
+.loginText {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.link {
+    color: #357EC7;
+} 
 
 
 /* ==========================================================================
@@ -498,21 +538,18 @@ display: none;
 }
 .esc {
     background-color: #FF605C;
-    position: absolute;
     height: 20px;
     width: 20px;
     border-radius: 50%;
 }
 .full {
     background-color: #FFBD44;
-    display: absolute;
     height: 20px;
     width: 20px;
     border-radius: 50%; 
 }
 .min {
     background-color: #00CA4E;
-    display: absolute;
     height: 20px;
     width: 20px;
     border-radius: 50%; 
