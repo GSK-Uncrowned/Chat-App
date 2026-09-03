@@ -459,8 +459,9 @@ display: none;
    Auth
    ========================================================================== */
 
-.authModal {
+.signup{
     position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -470,6 +471,25 @@ display: none;
     border-radius: 20px;
     justify-content: center;
     padding: 20px;
+}
+.login {
+    position: fixed;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+.login.hide {
+    display: none;
+}
+.signup.hide {
+    display: none;
 }
 .formCustom {
     display: flex;
@@ -516,10 +536,17 @@ display: none;
     text-align: center;
     margin-bottom: 20px;
 }
-.link {
+.link1 {
     color: #357EC7;
 }
-.link:hover {
+.link2 {
+    color: #357EC7;
+}
+.link1:hover {
+    color: #1E90FF;
+    cursor: pointer;
+}
+.link2:hover {
     color: #1E90FF;
     cursor: pointer;
 }

@@ -197,3 +197,11 @@ document.querySelector('.actionInfo').addEventListener('click', () => {
     const rightPanel = document.querySelector('.info');
     rightPanel.classList.toggle('show');
 });
+document.querySelector('.esc').addEventListener('click', () => {
+    const modal = document.querySelector('.signup');
+    modal.classList.toggle('hide');
+});
+document.querySelector('.esc').addEventListener('click', () => {
+    const modal = document.querySelector('.login');
+    modal.classList.toggle('hide');
+});
