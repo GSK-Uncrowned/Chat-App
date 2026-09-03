@@ -18,14 +18,6 @@ body {
     padding: 20px 0 20px 20px;
 }
 
-.auth {
-    background-image: url('assets/wallpaper.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed; /* Optional: keeps background still while scrolling */
-    color: white;
-}
 
 
 
@@ -396,7 +388,9 @@ display: none;
 
 
 
-
+/* ==========================================================================
+   8. MODALS
+   ========================================================================== */
 .hider {
     display: none;
 }
@@ -524,7 +518,11 @@ display: none;
 }
 .link {
     color: #357EC7;
-} 
+}
+.link:hover {
+    color: #1E90FF;
+    cursor: pointer;
+}
 
 
 /* ==========================================================================
@@ -542,17 +540,32 @@ display: none;
     width: 20px;
     border-radius: 50%;
 }
+.esc:hover {
+    background-color: #FF3B30;
+    cursor: pointer;
+    transform: scale(1.1);
+}
 .full {
     background-color: #FFBD44;
     height: 20px;
     width: 20px;
     border-radius: 50%; 
 }
+.full:hover {
+    background-color: #FF9500;
+    cursor: pointer;
+    transform: scale(1.1);
+}
 .min {
     background-color: #00CA4E;
     height: 20px;
     width: 20px;
     border-radius: 50%; 
+}
+.min:hover {
+    background-color: #00C700;
+    cursor: pointer;
+    transform: scale(1.1);
 }
 #mimi p {
     color: transparent;
