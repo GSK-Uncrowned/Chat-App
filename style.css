@@ -5,6 +5,10 @@
     text-decoration: none;
 }
 
+html {
+    font-size: 80%;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: black;
@@ -14,8 +18,8 @@ body {
 .app {
     Color: white;
     display: flex;
-    gap: 10px;
-    padding: 10px;
+    gap: 8px;
+    padding: 8px;
 }
 
 
@@ -26,19 +30,19 @@ body {
    ========================================================================= */
 
 .sideBar {
-    height: calc(100vh - 20px);
+    height: calc(100vh - 16px);
     background-color: #1e1e1e;
-    width: 100px;
-    border-radius: 20px;
+    width: 80px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-content: center;
-    padding: 15px 20px 0px 20px;
+    padding: 12px 16px 0px 16px;
 }
 
 .sideBar img {
-    margin: 10px 10px;
+    margin: 8px 8px;
 }
 
 .upperNav {
@@ -46,26 +50,26 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .lowerNav {
-    padding: 20px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
 }
 
 .chickenNugget:hover {
     background-color: #3A3B3C;
-    border-radius: 15px;
+    border-radius: 12px;
     cursor: pointer;
 }
 
 .mrKhen:hover {
     background-color: #3A3B3C;
-    border-radius: 15px;
+    border-radius: 12px;
     cursor: pointer;
 }
 
@@ -78,11 +82,11 @@ body {
    ========================================== */
 
 .cntcList {
-    height: calc(100vh - 20px);
+    height: calc(100vh - 16px);
     background-color: #1e1e1e;
     flex: 1;
     min-height: 0;
-    border-radius: 20px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
 }
@@ -96,33 +100,34 @@ body {
 .cntcListHeader {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin: 20px 25px;
+    gap: 16px;
+    margin: 16px 20px;
     border-bottom: 1px solid #3A3B3C;
-    padding-bottom: 14px;
+    padding-bottom: 11px;
 }
 
 .cntcListIcn {
     display: flex;
-    gap: 14px;
+    gap: 11px;
 }
 
 .cntcListIcn img:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
+
 .cntcListHeader h1 {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 700;
 }
 
 .cntcListHeader input {
     background-color: #3A3B3C;
-    height: 45px;
+    height: 36px;
     width: 100%;
-    font-size: 18px;
-    border-radius: 30px;
-    padding: 0px 20px;
+    font-size: 14px;
+    border-radius: 24px;
+    padding: 0px 16px;
     border: none;
     outline: none;
     color: white;
@@ -135,7 +140,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 5px;
+    gap: 4px;
 }
 
 .cntcPerson.active {
@@ -151,10 +156,10 @@ body {
 .cntcPerson {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin: 0 10px;
-    padding: 8px;
-    border-radius: 20px;
+    gap: 12px;
+    margin: 0 8px;
+    padding: 6px;
+    border-radius: 16px;
     color: rgb(214, 214, 214);
 }
 
@@ -164,12 +169,12 @@ body {
 }
 
 .cntcPersonInfo {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .cntcPersonImg {
-    height: 60px;
-    width: 60px;
+    height: 48px;
+    width: 48px;
 }
 
 
@@ -179,11 +184,11 @@ body {
    ========================================== */
 
 .mainChat {
-    height: calc(100vh - 20px);
+    height: calc(100vh - 16px);
     background-color: #1e1e1e;
     flex: 2;
-    border-radius: 20px;
-    padding: 10px 20px 15px 20px ;
+    border-radius: 16px;
+    padding: 8px 16px 12px 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -194,53 +199,53 @@ body {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #3A3B3C;
-    padding: 7px 10px 7px 10px;
+    padding: 6px 8px 6px 8px;
 }
 
 .chatHeaderLeft {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
 }
 
 .chatHeaderLeft:hover {
     background-color: #3A3B3C;
-    border-radius: 15px;
+    border-radius: 12px;
     cursor: pointer;
 }
 
 .nameOutput {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-weight: 500;
-    margin-bottom: 6px;
-    font-size: 25px;
-    padding: 10px 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    padding: 8px 8px;
 }
 
 .chatHeaderRight {
     display: flex;
-    gap: 20px;
+    gap: 16px;
 }
 
 .action {
-    padding: 5px 5px;
-    margin-bottom: 7px;
+    padding: 4px 4px;
+    margin-bottom: 6px;
 }
 
 .actionInfo {
-    padding: 5px 5px;
-    margin-bottom: 7px;
+    padding: 4px 4px;
+    margin-bottom: 6px;
 }
 
 .actionInfo:hover {
     background-color: #3A3B3C;
-    border-radius: 15px;
+    border-radius: 12px;
     cursor: pointer;
 }
 
 .action:hover {
     background-color: #3A3B3C;
-    border-radius: 15px;
+    border-radius: 12px;
     cursor: pointer;
 }
 
@@ -256,7 +261,7 @@ body {
     flex-direction: column;
     min-height: 0;
     overflow-y: auto;
-    gap: 30px;
+    gap: 24px;
 }
 
 .outputSection::before {
@@ -266,27 +271,27 @@ body {
 
 .incoming {
     background-color: #3A3B3C;
-    padding: 10px 15px;
+    padding: 8px 12px;
     width: fit-content;
-    border-radius: 40px;
-    font-size: 20px;
-    margin: 0 20px;
+    border-radius: 32px;
+    font-size: 16px;
+    margin: 0 16px;
 }
 
 .outgoing {
     background-color: #3A3B3C;
     align-self: flex-end;
-    padding: 10px 15px 13px 15px;
+    padding: 8px 12px 10px 12px;
     width: fit-content;
-    border-radius: 40px;
-    font-size: 20px;
+    border-radius: 32px;
+    font-size: 16px;
 }
 
 .inputSection {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding-top: 10px;
+    gap: 12px;
+    padding-top: 8px;
 }
 
 .inputSection input {
@@ -294,15 +299,15 @@ body {
     outline: none;
     border: none;
     color: white;
-    height: 45px;
-    font-size: 18px;
-    border-radius: 30px;
+    height: 36px;
+    font-size: 14px;
+    border-radius: 24px;
     flex: 1;
-    padding: 0px 25px;
+    padding: 0px 20px;
 }
 
 .inputSection img {
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     cursor: pointer;
 }
 
@@ -325,19 +330,19 @@ body {
    ========================================================================== */
 
 .info {
-display: none;
+    display: none;
 }
 
 .info.show {
     display: block;
-    flex: 0.8;   ;
+    flex: 0.8;
 }
 
-.infoCont{
-    height: calc(100vh - 20px);
+.infoCont {
+    height: calc(100vh - 16px);
     min-height: 0;
     background-color: #1e1e1e;
-    border-radius: 20px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -348,21 +353,21 @@ display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 50px 0 0 0;
+    margin: 40px 0 0 0;
 }
 
 .infoHeader img {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .infoHeader p {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .infoHeaderspcr {
     display: flex;
-    gap: 15px;
-    padding: 10px;
+    gap: 12px;
+    padding: 8px;
 }
 
 .infoHeaderspcr img:hover {
@@ -374,9 +379,9 @@ display: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 10px;
-    padding: 15px 20px;
-    border-radius: 10px;
+    margin: 0 8px;
+    padding: 12px 16px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
@@ -410,8 +415,8 @@ display: none;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #3A3B3C;
-    padding: 20px;
-    border-radius: 20px;
+    padding: 16px;
+    border-radius: 16px;
 }
 
 .joinChat input {
@@ -419,8 +424,8 @@ display: none;
     border: none;
     outline: none;
     color: white;
-    padding: 10px 15px;
-    border-radius: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
 }
 
 .joinChat button {
@@ -428,9 +433,9 @@ display: none;
     border: none;
     outline: none;
     color: rgb(197, 197, 197);
-    padding: 10px 15px;
-    border-radius: 10px;
-    margin-left: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-left: 8px;
 }
 
 .joinChat button:hover {
@@ -440,11 +445,11 @@ display: none;
 
 .closeButton {
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -8px;
+    right: -8px;
     margin-left: 0;
-    width: 28px;
-    height: 28px;
+    width: 22px;
+    height: 22px;
     padding: 0;
     display: flex;
     align-items: center;
@@ -458,7 +463,7 @@ display: none;
    Auth
    ========================================================================== */
 
-.signup{
+.signup {
     position: fixed;
     position: absolute;
     top: 50%;
@@ -467,10 +472,11 @@ display: none;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    border-radius: 16px;
     justify-content: center;
-    padding: 20px;
+    padding: 16px;
 }
+
 .login {
     position: fixed;
     position: absolute;
@@ -480,71 +486,82 @@ display: none;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    border-radius: 16px;
     justify-content: center;
-    padding: 20px;
+    padding: 16px;
 }
+
 .login.hide {
     display: none;
 }
+
 .signup.hide {
     display: none;
 }
+
 .formCustom {
     display: flex;
     flex-direction: column;
 }
+
 .formCustom input {
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
     outline: none;
     color: white;
-    font-size: 15px;
-    padding: 10px 15px;
+    font-size: 12px;
+    padding: 8px 12px;
     border-radius: 999px;
-    margin-bottom: 20px;
-    height: 60px;
-    width: 500px;
-    padding: 25px;
+    margin-bottom: 16px;
+    height: 48px;
+    width: 400px;
+    padding: 20px;
 }
+
 .formCustom button {
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
     outline: none;
     color: white;
-    padding: 10px 15px;
+    padding: 8px 12px;
     border-radius: 999px;
-    height: 60px;
-    width: 500px;
+    height: 48px;
+    width: 400px;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
+
 .formCustom button:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
 .kupal {
-    font-size: 60px;
+    font-size: 48px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     text-align: center;
 }
+
 .loginText {
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
+
 .link1 {
     color: #357EC7;
 }
+
 .link2 {
     color: #357EC7;
 }
+
 .link1:hover {
     color: #1E90FF;
     cursor: pointer;
 }
+
 .link2:hover {
     color: #1E90FF;
     cursor: pointer;
@@ -556,43 +573,50 @@ display: none;
    ========================================================================== */
 .cntrl {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     background-color: rgba(0, 0, 0, 0);
-    border-radius: 20px 20px 0 0;
+    border-radius: 16px 16px 0 0;
 }
+
 .esc {
     background-color: #FF605C;
-    height: 20px;
-    width: 20px;
+    height: 16px;
+    width: 16px;
     border-radius: 50%;
 }
+
 .esc:hover {
     background-color: #FF3B30;
     cursor: pointer;
     transform: scale(1.1);
 }
+
 .full {
     background-color: #FFBD44;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%; 
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
 }
+
 .full:hover {
     background-color: #FF9500;
     cursor: pointer;
     transform: scale(1.1);
 }
+
 .min {
     background-color: #00CA4E;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%; 
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
 }
+
 .min:hover {
     background-color: #00C700;
     cursor: pointer;
     transform: scale(1.1);
 }
+
 #mimi p {
     color: transparent;
 }
