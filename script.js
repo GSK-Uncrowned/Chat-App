@@ -197,11 +197,21 @@ document.querySelector('.actionInfo').addEventListener('click', () => {
     const rightPanel = document.querySelector('.info');
     rightPanel.classList.toggle('show');
 });
-document.querySelector('.esc').addEventListener('click', () => {
-    const modal = document.querySelector('.signup');
-    modal.classList.toggle('hide');
+const esc = document.querySelectorAll('.esc');
+const modal1 = document.querySelector('.signUp');
+const modal2 = document.querySelector('.logIn');
+
+esc.forEach((something) => {
+    something.addEventListener('click', () => {
+        modal1.classList.toggle('hide');
+        modal2.classList.toggle('hide');
+    });
 });
-document.querySelector('.esc').addEventListener('click', () => {
-    const modal = document.querySelector('.login');
-    modal.classList.toggle('hide');
+
+const change = document.querySelectorAll('.link');
+change.forEach((something) => {
+    something.addEventListener('click', () => {
+        modal1.classList.toggle('hide');
+        modal2.classList.toggle('hide');
+    });
 });
