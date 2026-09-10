@@ -187,7 +187,6 @@ document.querySelector('.newChat').addEventListener('click', () => {
     const hider = document.querySelector('.hider');
     hider.classList.toggle('show');
 });
-
 document.querySelector('.closeButton').addEventListener('click', () => {
     const hider = document.querySelector('.hider');
     hider.classList.remove('show');
@@ -197,14 +196,15 @@ document.querySelector('.actionInfo').addEventListener('click', () => {
     const rightPanel = document.querySelector('.info');
     rightPanel.classList.toggle('show');
 });
+
 const esc = document.querySelectorAll('.esc');
 const modal1 = document.querySelector('.signUp');
 const modal2 = document.querySelector('.logIn');
+const modal = document.querySelector('.modal');
 
 esc.forEach((something) => {
     something.addEventListener('click', () => {
-        modal1.classList.toggle('hide');
-        modal2.classList.toggle('hide');
+        modal.classList.toggle('hide');
     });
 });
 
