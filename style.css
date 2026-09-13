@@ -22,7 +22,38 @@ body {
     padding: 8px;
 }
 
+@media (max-width: 768px) {
+    /* Stack the main layout container vertically */
+    body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+    }
 
+    /* Adjust sidebar width or hide it on mobile if a chat is open */
+    .sidebar, .chat-list-container {
+        width: 100% !important;
+        height: 100%;
+        position: absolute;
+        z-index: 10;
+        background-color: inherit;
+        transition: transform 0.3s ease;
+    }
+
+    /* Main chat interface fills the screen */
+    .chat-container, .main-chat-area {
+        width: 100% !important;
+        height: 100% !important;
+        position: relative;
+    }
+
+    /* Scale down chat input elements for small screens */
+    .input-section input, .input-section textarea {
+        font-size: 16px; /* Prevents auto-zoom on iOS */
+    }
+}
 
 
 /* =========================================================================
