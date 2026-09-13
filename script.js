@@ -235,6 +235,11 @@ document.querySelector('.cntcPeople').addEventListener('click', (e) => {
 
     document.querySelector('.nameOutput').textContent = contact.dataset.name;
     loadMessages(activeContact);
+
+    document.querySelector('.nameOutput').textContent = contact.dataset.name;
+    loadMessages(activeContact);
+
+    document.body.classList.add('chat-active');
 });
 
 document.querySelector('.newChat').addEventListener('click', () => {
@@ -268,4 +273,8 @@ document.querySelectorAll('.link').forEach((link) => {
         modal1.classList.toggle('hide');
         modal2.classList.toggle('hide');
     });
+});
+
+document.querySelector('.chatHeaderLeft').addEventListener('click', () => {
+    document.body.classList.remove('chat-active');
 });
