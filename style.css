@@ -30,21 +30,35 @@ body {
     flex-direction: row;
 }
 
-/* Then handle mobile stacking inside your media query: */
 @media (max-width: 768px) {
-    .app-container, .main-layout {
-        flex-direction: column;
-    }
-    
-    /* Hide the sidebar by default on mobile if a chat is active, or stack them */
-    .sidebar {
-        width: 100%;
-        height: auto;
-    }
-    
-    .chat-window {
+    /* Make the whole app container fill the mobile screen */
+    body, html {
         width: 100%;
         height: 100vh;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Stack or manage panels so they don't all show at once */
+    .app-container {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+    }
+
+    /* When a chat is open on mobile, hide the sidebar/chat list and show only the chat window */
+    body.chat-active .sidebar, 
+    body.chat-active .chat-list-container {
+        display: none !important;
+    }
+
+    body.chat-active .main-chat-area, 
+    body.chat-active .chat-window {
+        display: flex !important;
+        width: 100vw !important;
+        height: 100vh !important;
     }
 }
 
