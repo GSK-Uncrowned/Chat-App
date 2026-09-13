@@ -108,7 +108,7 @@ async function fetchAIReply(userMessage) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: 'poolside/laguna-xs-2.1:free',
+                model: 'nvidia/nemotron-3-ultra-550b-a55b:free',
                 messages: [
                     {
                         role: 'system',
