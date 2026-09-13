@@ -71,7 +71,7 @@ async function fetchAIReply(userMessage) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: 'cognitivecomputations/dolphin-mistral-24b-venice-edition:free',
+                model: 'google/gemini-2.0-flash-exp:free',
                 messages: [
                     {
                         role: 'system',
