@@ -7,6 +7,12 @@ const container = document.querySelector('.cntcPeople');
 let activeContact = null;
 let activeContactData = null;
 
+let localUserId = localStorage.getItem('local_user_id');
+if (!localUserId) {
+    localUserId = crypto.randomUUID();
+    localStorage.setItem('local_user_id', localUserId);
+}
+
 function scrollOutputToBottom() {
     output.scrollTop = output.scrollHeight;
 }
@@ -37,7 +43,8 @@ async function loadMessages(contactId) {
         .from('chats')
         .select('*')
         .order('created_at', { ascending: true })
-        .eq('contact_id', contactId);
+        .eq('contact_id', contactId)
+        .eq('user_id', localUserId);
 
     if (error) {
         alert('Error loading messages: ' + error.message);
@@ -75,7 +82,7 @@ async function fetchAIReply(userMessage) {
                 messages: [
                     {
                         role: 'system',
-                        content: `You are roleplaying as ${activeContactData.name}.\nPersonality: ${activeContactData.personality || 'Engaging character'}.`
+                        content: `You are roleplaying as ${activeContactData.name}.\nPersonality: ${activeContactData.personality || 'Engaging character'}. Never output internal safety tags or metadata.`
                     },
                     { role: 'user', content: userMessage }
                 ]
@@ -92,7 +99,8 @@ async function fetchAIReply(userMessage) {
         await supabaseClient.from('chats').insert([{
             text: aiReply,
             contact_id: activeContact,
-            is_bot: true
+            is_bot: true,
+            user_id: localUserId
         }]);
 
     } catch (err) {
@@ -118,7 +126,8 @@ async function sendMessage() {
         .insert([{
             text: message,
             contact_id: activeContact,
-            is_bot: false
+            is_bot: false,
+            user_id: localUserId
         }]);
 
     if (insertError) {
@@ -128,47 +137,6 @@ async function sendMessage() {
 
     fetchAIReply(message);
 }
-
-document.querySelector('.inputSection input').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') sendMessage();
-});
-
-document.querySelector('.likee').addEventListener('click', () => {
-    const message = "👍";
-    appendOutgoingMessage(message);
-    fetchAIReply(message);
-});
-
-async function loadContacts() {
-    container.innerHTML = '';
-    const { data, error } = await supabaseClient
-        .from('contacts')
-        .select('*')
-        .order('created_at', { ascending: true });
-
-    if (error) {
-        alert('Error loading contacts: ' + error.message);
-        return;
-    }
-
-    data.forEach((contact) => {
-        const tatay = document.createElement('div');
-        tatay.className = "cntcPerson";
-        tatay.dataset.contactId = contact.id;
-        tatay.dataset.name = contact.name;
-        tatay.dataset.personality = contact.personality || '';
-
-        tatay.innerHTML = `
-            <img src="assets/profile.svg" class="cntcPersonImg">
-            <div class="cntcPersonInfo">
-                <h1 class="cntcPersonName">${contact.name}</h1>
-                <p>${contact.personality ? contact.personality.substring(0, 25) + '...' : 'Start roleplaying'}</p>
-            </div>
-        `;
-        container.appendChild(tatay);
-    });
-}
-loadContacts();
 
 async function createCharacter() {
     const nameInput = document.querySelector('.charNameInput');
@@ -209,11 +177,15 @@ async function createCharacter() {
         await supabaseClient.from('chats').insert([{
             text: greeting,
             contact_id: newChar.id,
-            is_bot: true
+            is_bot: true,
+            user_id: localUserId
         }]);
     }
 
-    loadContacts();
+    // Assuming loadContacts is defined elsewhere in your setup
+    if (typeof loadContacts === 'function') {
+        loadContacts();
+    }
 }
 
 document.querySelector('.createCharBtn').addEventListener('click', createCharacter);
@@ -232,9 +204,6 @@ document.querySelector('.cntcPeople').addEventListener('click', (e) => {
         name: contact.dataset.name,
         personality: contact.dataset.personality
     };
-
-    document.querySelector('.nameOutput').textContent = contact.dataset.name;
-    loadMessages(activeContact);
 
     document.querySelector('.nameOutput').textContent = contact.dataset.name;
     loadMessages(activeContact);
