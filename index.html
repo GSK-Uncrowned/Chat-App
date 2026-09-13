@@ -92,10 +92,23 @@
                 </div>
             </aside>
 
+            <!-- Character Creation Modal -->
             <div class="hider">
                 <div class="joinChat">
                     <button class="closeButton">X</button>
-                    <input type="text" placeholder="Enter your name..." class="nameInput">
+                    <h2>Create Character</h2>
+
+                    <label>Character Name</label>
+                    <input type="text" placeholder="e.g. Cyberpunk Mercenary" class="charNameInput">
+
+                    <label>Personality & System Prompt</label>
+                    <textarea placeholder="e.g. You are a street-smart mercenary who speaks in cyberpunk slang..."
+                        class="charPersonalityInput" rows="3"></textarea>
+
+                    <label>First Greeting (Optional)</label>
+                    <input type="text" placeholder="e.g. What do you want, rookie?" class="charGreetingInput">
+
+                    <button class="createCharBtn">Create Character</button>
                 </div>
             </div>
 

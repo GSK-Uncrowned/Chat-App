@@ -1,101 +1,147 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 const supabaseClient = createClient('https://mflwqmpfqdwscyxkdpfi.supabase.co', "sb_publishable_JVvk1dxs_aY3JydW6N_JfQ_tKcf1_RG");
 
-
 const output = document.querySelector('.outputSection');
 const container = document.querySelector('.cntcPeople');
 
 let activeContact = null;
+let activeContactData = null;
 
 function scrollOutputToBottom() {
     output.scrollTop = output.scrollHeight;
 }
 
-/*====================================================================
-   Load messages from Supabase and display them in the output section 
-  ====================================================================*/
-async function loadMessages (contactId) {
+function appendOutgoingMessage(text) {
+    const div = document.createElement('div');
+    div.className = 'outgoing';
+    const p = document.createElement('p');
+    p.textContent = text;
+    div.appendChild(p);
+    output.appendChild(div);
+    scrollOutputToBottom();
+}
+
+function appendIncomingMessage(text) {
+    const div = document.createElement('div');
+    div.className = 'incoming';
+    const p = document.createElement('p');
+    p.textContent = text;
+    div.appendChild(p);
+    output.appendChild(div);
+    scrollOutputToBottom();
+}
+
+async function loadMessages(contactId) {
     output.innerHTML = '';
-    const {data: messages, error} = await supabaseClient
-    .from('chats')
-    .select('*')
-    .order('created_at', { ascending: true })
-    .eq('contact_id', contactId);
+    const { data: messages, error } = await supabaseClient
+        .from('chats')
+        .select('*')
+        .order('created_at', { ascending: true })
+        .eq('contact_id', contactId);
 
     if (error) {
         alert('Error loading messages: ' + error.message);
         return;
     }
 
-    messages.forEach((message) => {
-        const div = document.createElement('div');
-        div.className = 'outgoing';
-        const p = document.createElement('p');
-        output.appendChild(div);
-        div.appendChild(p);
-        p.textContent = message.text;
+    messages.forEach((msg) => {
+        if (msg.is_bot) {
+            appendIncomingMessage(msg.text);
+        } else {
+            appendOutgoingMessage(msg.text);
+        }
     });
 
     scrollOutputToBottom();
 }
 
+async function fetchAIReply(userMessage) {
+    if (!activeContactData) return;
 
-/*====================================================================
-   Function to send a message and insert it into the Supabase database
-  ====================================================================*/
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'incoming';
+    loadingDiv.innerHTML = '<p><i>Typing...</i></p>';
+    output.appendChild(loadingDiv);
+    scrollOutputToBottom();
+
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            body: JSON.stringify({
+                model: 'cognitivecomputations/dolphin-mistral-24b-venice-edition:free',
+                messages: [
+                    { 
+                        role: 'system', 
+                        content: `You are roleplaying as ${activeContactData.name}.\nPersonality: ${activeContactData.personality || 'Engaging character'}.\nRules: Stay strictly in character at all times.` 
+                    },
+                    { role: 'user', content: userMessage }
+                ]
+            })
+        });
+
+        const data = await response.json();
+        if (output.contains(loadingDiv)) output.removeChild(loadingDiv);
+
+        const aiReply = data.choices?.[0]?.message?.content || "No response received.";
+        
+        appendIncomingMessage(aiReply);
+
+        await supabaseClient.from('chats').insert([{
+            text: aiReply,
+            contact_id: activeContact,
+            is_bot: true
+        }]);
+
+    } catch (err) {
+        if (output.contains(loadingDiv)) output.removeChild(loadingDiv);
+        console.error('AI Error:', err);
+    }
+}
+
 async function sendMessage() {
     if (!activeContact) {
-        alert('Please select a contact first.');
+        alert('Please select a character first.');
         return;
     }
     const input = document.querySelector('.inputSection input');
-
     const message = input.value.trim();
     if (message === '') return;
 
-    const div = document.createElement('div');
-    div.className = 'outgoing';
-    const p = document.createElement('p');
-    output.appendChild(div);
-    div.appendChild(p);
-    p.textContent = message;
     input.value = '';
-    scrollOutputToBottom();
+    appendOutgoingMessage(message);
 
-    const {data: insertText, error: insertError} = await supabaseClient
-    .from('chats')
-    .insert([{
-        text: message,
-        contact_id: activeContact
-    }]);
+    const { error: insertError } = await supabaseClient
+        .from('chats')
+        .insert([{
+            text: message,
+            contact_id: activeContact,
+            is_bot: false
+        }]);
 
     if (insertError) {
-        alert('Error inserting message: ' + insertError.message);
+        alert('Error saving message: ' + insertError.message);
+        return;
     }
+
+    fetchAIReply(message);
 }
+
 document.querySelector('.inputSection input').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') sendMessage();
 });
 
 document.querySelector('.likee').addEventListener('click', () => {
-    const bubble = document.createElement('div');
-    bubble.className = 'outgoing';
-    const likee = document.createElement('img');
-    likee.src = 'assets/like.svg';
-    output.appendChild(bubble);
-    bubble.appendChild(likee);
-    scrollOutputToBottom();
+    const message = "👍";
+    appendOutgoingMessage(message);
+    fetchAIReply(message);
 });
 
-
-/*==============================================================================
-   Function to display the contact name and profile picture in the contact list
-  ==============================================================================*/
-async function loadContacts(contactId) {
-    const {data, error} = await supabaseClient
-    .from('contacts')
-    .select('*')
-    .order('created_at', { ascending: true })
+async function loadContacts() {
+    container.innerHTML = '';
+    const { data, error } = await supabaseClient
+        .from('contacts')
+        .select('*')
+        .order('created_at', { ascending: true });
 
     if (error) {
         alert('Error loading contacts: ' + error.message);
@@ -103,98 +149,100 @@ async function loadContacts(contactId) {
     }
 
     data.forEach((contact) => {
-    const tatay = document.createElement('div');
-    tatay.className = "cntcPerson";
+        const tatay = document.createElement('div');
+        tatay.className = "cntcPerson";
+        tatay.dataset.contactId = contact.id;
+        tatay.dataset.name = contact.name;
+        tatay.dataset.personality = contact.personality || '';
 
-    tatay.dataset.contactId = contact.id;
-
-    tatay.innerHTML = `
-        <img src="assets/profile.svg" class="cntcPersonImg">
-        <div class="cntcPersonInfo">
-            <h1 class="cntcPersonName">${contact.name}</h1>
-            <p>Start a new chat</p>
-        </div>
-    `
-    container.appendChild(tatay);
+        tatay.innerHTML = `
+            <img src="assets/profile.svg" class="cntcPersonImg">
+            <div class="cntcPersonInfo">
+                <h1 class="cntcPersonName">${contact.name}</h1>
+                <p>${contact.personality ? contact.personality.substring(0, 25) + '...' : 'Start roleplaying'}</p>
+            </div>
+        `;
+        container.appendChild(tatay);
     });
 }
 loadContacts();
 
+async function createCharacter() {
+    const nameInput = document.querySelector('.charNameInput');
+    const personalityInput = document.querySelector('.charPersonalityInput');
+    const greetingInput = document.querySelector('.charGreetingInput');
 
-async function createContact() {
-
-    const nameInput = document.querySelector('.nameInput');
     const name = nameInput.value.trim();
-    if (name === '') return;
+    const personality = personalityInput.value.trim();
+    const greeting = greetingInput.value.trim();
+
+    if (name === '') {
+        alert('Character name is required.');
+        return;
+    }
 
     nameInput.value = '';
-    const hider = document.querySelector('.hider');
-    hider.classList.remove('show');
+    personalityInput.value = '';
+    greetingInput.value = '';
+    document.querySelector('.hider').classList.remove('show');
 
-    const {data, error} = await supabaseClient
-    .from('contacts')
-    .insert([{name: name}])
-    .select();
+    const { data, error } = await supabaseClient
+        .from('contacts')
+        .insert([{
+            name: name,
+            personality: personality,
+            greeting: greeting
+        }])
+        .select();
 
-    const tatay = document.createElement('div');
-    tatay.className = "cntcPerson";
+    if (error) {
+        alert('Error creating character: ' + error.message);
+        return;
+    }
 
-    tatay.dataset.contactId = data[0].id;
+    const newChar = data[0];
 
-    tatay.innerHTML = `
-        <img src="assets/profile.svg" class="cntcPersonImg">
-        <div class="cntcPersonInfo">
-            <h1 class="cntcPersonName">${data[0].name}</h1>
-            <p>Start a new chat</p>
-        </div>
-    `
+    if (greeting !== '') {
+        await supabaseClient.from('chats').insert([{
+            text: greeting,
+            contact_id: newChar.id,
+            is_bot: true
+        }]);
+    }
 
-    container.appendChild(tatay);
+    loadContacts();
 }
-document.querySelector('.nameInput').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') createContact();
-});
 
+document.querySelector('.createCharBtn').addEventListener('click', createCharacter);
 
-/*====================================================================
-                 Highlighting the selected contact
-====================================================================*/
 document.querySelector('.cntcPeople').addEventListener('click', (e) => {
     const contact = e.target.closest('.cntcPerson');
     if (!contact) return;
 
-    const allContact = document.querySelectorAll('.cntcPerson');
-    allContact.forEach((person) => {
+    document.querySelectorAll('.cntcPerson').forEach((person) => {
         person.classList.remove('active');
     });
 
-    const contactName = contact.querySelector('.cntcPersonName').textContent;
-    const nameOutput = document.querySelector('.nameOutput');
-    nameOutput.textContent = contactName;
-
     contact.classList.add('active');
-
     activeContact = contact.dataset.contactId;
+    activeContactData = {
+        name: contact.dataset.name,
+        personality: contact.dataset.personality
+    };
 
+    document.querySelector('.nameOutput').textContent = contact.dataset.name;
     loadMessages(activeContact);
 });
 
-
-/*====================================================================
-   Toggle the visibility of the new chat form and the right panel
-  ====================================================================*/
 document.querySelector('.newChat').addEventListener('click', () => {
-    const hider = document.querySelector('.hider');
-    hider.classList.toggle('show');
+    document.querySelector('.hider').classList.toggle('show');
 });
 document.querySelector('.closeButton').addEventListener('click', () => {
-    const hider = document.querySelector('.hider');
-    hider.classList.remove('show');
+    document.querySelector('.hider').classList.remove('show');
 });
 
 document.querySelector('.actionInfo').addEventListener('click', () => {
-    const rightPanel = document.querySelector('.info');
-    rightPanel.classList.toggle('show');
+    document.querySelector('.info').classList.toggle('show');
 });
 
 const esc = document.querySelectorAll('.esc');
@@ -202,19 +250,18 @@ const modal = document.querySelector('.modal');
 const modal1 = document.querySelector('.signUp');
 const modal2 = document.querySelector('.logIn');
 
-const acc = document.querySelector('.mrKhen').addEventListener('click', () => {
+document.querySelector('.mrKhen').addEventListener('click', () => {
     modal.classList.toggle('hide');
 });
 
-esc.forEach((something) => {
-    something.addEventListener('click', () => {
+esc.forEach((element) => {
+    element.addEventListener('click', () => {
         modal.classList.toggle('hide');
     });
 });
 
-const change = document.querySelectorAll('.link');
-change.forEach((something) => {
-    something.addEventListener('click', () => {
+document.querySelectorAll('.link').forEach((link) => {
+    link.addEventListener('click', () => {
         modal1.classList.toggle('hide');
         modal2.classList.toggle('hide');
     });
