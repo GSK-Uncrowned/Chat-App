@@ -41,7 +41,8 @@ async function loadContacts() {
     container.innerHTML = '';
     const { data: contacts, error } = await supabaseClient
         .from('contacts')
-        .select('*');
+        .select('*')
+        .eq('user_id', localUserId); // Only fetch this user's created contacts
 
     if (error) {
         console.error('Error loading contacts:', error.message);
@@ -196,7 +197,8 @@ async function createCharacter() {
         .insert([{
             name: name,
             personality: personality,
-            greeting: greeting
+            greeting: greeting,
+            user_id: localUserId // Stamp contact with local user ID
         }])
         .select();
 
@@ -275,7 +277,7 @@ document.querySelectorAll('.link').forEach((link) => {
     });
 });
 
-document.querySelector('.chatHeaderLeft').addEventListener('click', () => {
+document.querySelector('.chatHeaderLeft').router?.() || document.querySelector('.chatHeaderLeft').addEventListener('click', () => {
     document.body.classList.remove('chat-active');
 });
 
