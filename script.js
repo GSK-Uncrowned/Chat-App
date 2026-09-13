@@ -70,9 +70,9 @@ async function fetchAIReply(userMessage) {
             body: JSON.stringify({
                 model: 'cognitivecomputations/dolphin-mistral-24b-venice-edition:free',
                 messages: [
-                    { 
-                        role: 'system', 
-                        content: `You are roleplaying as ${activeContactData.name}.\nPersonality: ${activeContactData.personality || 'Engaging character'}.\nRules: Stay strictly in character at all times.` 
+                    {
+                        role: 'system',
+                        content: `You are roleplaying as ${activeContactData.name}.\nPersonality: ${activeContactData.personality || 'Engaging character'}.\nRules: Stay strictly...`
                     },
                     { role: 'user', content: userMessage }
                 ]
@@ -83,7 +83,7 @@ async function fetchAIReply(userMessage) {
         if (output.contains(loadingDiv)) output.removeChild(loadingDiv);
 
         const aiReply = data.choices?.[0]?.message?.content || "No response received.";
-        
+
         appendIncomingMessage(aiReply);
 
         await supabaseClient.from('chats').insert([{
