@@ -67,12 +67,15 @@ async function fetchAIReply(userMessage) {
     try {
         const response = await fetch('/api/chat', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 model: 'cognitivecomputations/dolphin-mistral-24b-venice-edition:free',
                 messages: [
                     {
                         role: 'system',
-                        content: `You are roleplaying as ${activeContactData.name}.\nPersonality: ${activeContactData.personality || 'Engaging character'}.\nRules: Stay strictly...`
+                        content: `You are roleplaying as ${activeContactData.name}.\nPersonality: ${activeContactData.personality || 'Engaging character'}.`
                     },
                     { role: 'user', content: userMessage }
                 ]
