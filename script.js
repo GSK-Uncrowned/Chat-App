@@ -198,9 +198,13 @@ document.querySelector('.actionInfo').addEventListener('click', () => {
 });
 
 const esc = document.querySelectorAll('.esc');
+const modal = document.querySelector('.modal');
 const modal1 = document.querySelector('.signUp');
 const modal2 = document.querySelector('.logIn');
-const modal = document.querySelector('.modal');
+
+const acc = document.querySelector('.mrKhen').addEventListener('click', () => {
+    modal.classList.toggle('hide');
+});
 
 esc.forEach((something) => {
     something.addEventListener('click', () => {
