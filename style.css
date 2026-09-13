@@ -158,7 +158,7 @@ body {
     align-items: center;
     gap: 12px;
     margin: 0 8px;
-    padding: 6px;
+    padding: 6px 13px;
     border-radius: 16px;
     color: rgb(214, 214, 214);
 }
@@ -468,7 +468,7 @@ body {
    /modals /auth modal
    ============================================== */
 
-.modal{
+.modal {
     position: fixed;
     position: absolute;
     top: 50%;
