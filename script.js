@@ -244,7 +244,7 @@ document.querySelector('.cntcPeople').addEventListener('click', (e) => {
     document.body.classList.add('chat-active');
 });
 
-document.querySelector('.newChat').addEventListener('click', () => {
+document.querySelector('.newChatBtn').addEventListener('click', () => {
     document.querySelector('.hider').classList.toggle('show');
 });
 document.querySelector('.closeButton').addEventListener('click', () => {
