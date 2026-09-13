@@ -37,6 +37,35 @@ function appendIncomingMessage(text) {
     scrollOutputToBottom();
 }
 
+async function loadContacts() {
+    container.innerHTML = '';
+    const { data: contacts, error } = await supabaseClient
+        .from('contacts')
+        .select('*');
+
+    if (error) {
+        console.error('Error loading contacts:', error.message);
+        return;
+    }
+
+    contacts.forEach((contact) => {
+        const div = document.createElement('div');
+        div.className = 'cntcPerson';
+        div.dataset.contactId = contact.id;
+        div.dataset.name = contact.name;
+        div.dataset.personality = contact.personality || '';
+
+        div.innerHTML = `
+            <img src="assets/profile.svg" height="48px" width="48px" class="cntcPersonImg">
+            <div class="cntcPersonInfo">
+                <h3>${contact.name}</h3>
+                <p>${contact.personality ? contact.personality.substring(0, 30) + '...' : 'Custom Character'}</p>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+}
+
 async function loadMessages(contactId) {
     output.innerHTML = '';
     const { data: messages, error } = await supabaseClient
@@ -138,6 +167,11 @@ async function sendMessage() {
     fetchAIReply(message);
 }
 
+document.querySelector('.inputSection button').addEventListener('click', sendMessage);
+document.querySelector('.inputSection input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+});
+
 async function createCharacter() {
     const nameInput = document.querySelector('.charNameInput');
     const personalityInput = document.querySelector('.charPersonalityInput');
@@ -182,10 +216,7 @@ async function createCharacter() {
         }]);
     }
 
-    // Assuming loadContacts is defined elsewhere in your setup
-    if (typeof loadContacts === 'function') {
-        loadContacts();
-    }
+    loadContacts();
 }
 
 document.querySelector('.createCharBtn').addEventListener('click', createCharacter);
@@ -247,3 +278,5 @@ document.querySelectorAll('.link').forEach((link) => {
 document.querySelector('.chatHeaderLeft').addEventListener('click', () => {
     document.body.classList.remove('chat-active');
 });
+
+loadContacts();
