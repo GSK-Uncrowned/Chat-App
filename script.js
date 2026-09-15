@@ -1,7 +1,6 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 const supabaseClient = createClient('https://mflwqmpfqdwscyxkdpfi.supabase.co', "sb_publishable_JVvk1dxs_aY3JydW6N_JfQ_tKcf1_RG");
 
-
 const output = document.querySelector('.outputSection');
 const container = document.querySelector('.cntcPeople');
 
@@ -14,13 +13,13 @@ function scrollOutputToBottom() {
 /*====================================================================
    Load messages from Supabase and display them in the output section 
   ====================================================================*/
-async function loadMessages (contactId) {
+async function loadMessages(contactId) {
     output.innerHTML = '';
-    const {data: messages, error} = await supabaseClient
-    .from('chats')
-    .select('*')
-    .order('created_at', { ascending: true })
-    .eq('contact_id', contactId);
+    const { data: messages, error } = await supabaseClient
+        .from('chats')
+        .select('*')
+        .order('created_at', { ascending: true })
+        .eq('contact_id', contactId);
 
     if (error) {
         alert('Error loading messages: ' + error.message);
@@ -62,12 +61,12 @@ async function sendMessage() {
     input.value = '';
     scrollOutputToBottom();
 
-    const {data: insertText, error: insertError} = await supabaseClient
-    .from('chats')
-    .insert([{
-        text: message,
-        contact_id: activeContact
-    }]);
+    const { data: insertText, error: insertError } = await supabaseClient
+        .from('chats')
+        .insert([{
+            text: message,
+            contact_id: activeContact
+        }]);
 
     if (insertError) {
         alert('Error inserting message: ' + insertError.message);
@@ -92,10 +91,10 @@ document.querySelector('.likee').addEventListener('click', () => {
    Function to display the contact name and profile picture in the contact list
   ==============================================================================*/
 async function loadContacts(contactId) {
-    const {data, error} = await supabaseClient
-    .from('contacts')
-    .select('*')
-    .order('created_at', { ascending: true })
+    const { data, error } = await supabaseClient
+        .from('contacts')
+        .select('*')
+        .order('created_at', { ascending: true })
 
     if (error) {
         alert('Error loading contacts: ' + error.message);
@@ -103,38 +102,49 @@ async function loadContacts(contactId) {
     }
 
     data.forEach((contact) => {
-    const tatay = document.createElement('div');
-    tatay.className = "cntcPerson";
+        const tatay = document.createElement('div');
+        tatay.className = "cntcPerson";
 
-    tatay.dataset.contactId = contact.id;
+        tatay.dataset.contactId = contact.id;
 
-    tatay.innerHTML = `
+        tatay.innerHTML = `
         <img src="assets/profile.svg" class="cntcPersonImg">
         <div class="cntcPersonInfo">
             <h1 class="cntcPersonName">${contact.name}</h1>
             <p>Start a new chat</p>
         </div>
     `
-    container.appendChild(tatay);
+        container.appendChild(tatay);
     });
 }
 loadContacts();
 
+const loginForm = document.querySelector('.logIn');
+const signupForm = document.querySelector('.signUp');
 
-async function createContact() {
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    const nameInput = document.querySelector('.nameInput');
-    const name = nameInput.value.trim();
-    if (name === '') return;
+    const email = loginForm.querySelector('.emailInput').value.trim();
+    const password = loginForm.querySelector('.passwordInput').value.trim();
 
-    nameInput.value = '';
-    const hider = document.querySelector('.hider');
-    hider.classList.remove('show');
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password,
+    });
+});
 
-    const {data, error} = await supabaseClient
-    .from('contacts')
-    .insert([{name: name}])
-    .select();
+signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const userName = signupForm.querySelector('.userInput').value.trim();
+    const email = signupForm.querySelector('.emailInput').value.trim();
+    const password = signupForm.querySelector('.passwordInput').value.trim();
+
+    const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password
+    });
 
     const tatay = document.createElement('div');
     tatay.className = "cntcPerson";
@@ -144,17 +154,13 @@ async function createContact() {
     tatay.innerHTML = `
         <img src="assets/profile.svg" class="cntcPersonImg">
         <div class="cntcPersonInfo">
-            <h1 class="cntcPersonName">${data[0].name}</h1>
+            <h1 class="cntcPersonName">${data[0].userName}</h1>
             <p>Start a new chat</p>
         </div>
     `
 
     container.appendChild(tatay);
-}
-document.querySelector('.nameInput').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') createContact();
 });
-
 
 /*====================================================================
                  Highlighting the selected contact
@@ -183,14 +189,6 @@ document.querySelector('.cntcPeople').addEventListener('click', (e) => {
 /*====================================================================
    Toggle the visibility of the new chat form and the right panel
   ====================================================================*/
-document.querySelector('.newChat').addEventListener('click', () => {
-    const hider = document.querySelector('.hider');
-    hider.classList.toggle('show');
-});
-document.querySelector('.closeButton').addEventListener('click', () => {
-    const hider = document.querySelector('.hider');
-    hider.classList.remove('show');
-});
 
 document.querySelector('.actionInfo').addEventListener('click', () => {
     const rightPanel = document.querySelector('.info');

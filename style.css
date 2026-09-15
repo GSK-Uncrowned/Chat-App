@@ -121,6 +121,21 @@ body {
     font-weight: 700;
 }
 
+.newChatText {
+    color: white;
+}
+.newChat {
+    background-color: #007FFF;
+    border: none;
+    outline: none;
+    border-radius: 999px;
+    padding: 1px 13px;
+}
+.newChat:hover {
+    background-color: #0059B2;
+    cursor: pointer;
+}
+
 .cntcListHeader input {
     background-color: #3A3B3C;
     height: 36px;
