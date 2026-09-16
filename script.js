@@ -134,6 +134,23 @@ loginForm.addEventListener('submit', async (e) => {
     });
 });
 
+function createContact(name) {
+    const tatay = document.createElement('div');
+    tatay.className = "cntcPerson";
+
+    tatay.dataset.contactId = name;
+
+    tatay.innerHTML = `
+        <img src="assets/profile.svg" class="cntcPersonImg">
+        <div class="cntcPersonInfo">
+            <h1 class="cntcPersonName">${name}</h1>
+            <p>Start a new chat</p>
+        </div>
+    `
+
+    container.appendChild(tatay);
+}
+
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -146,20 +163,7 @@ signupForm.addEventListener('submit', async (e) => {
         password: password
     });
 
-    const tatay = document.createElement('div');
-    tatay.className = "cntcPerson";
-
-    tatay.dataset.contactId = data[0].id;
-
-    tatay.innerHTML = `
-        <img src="assets/profile.svg" class="cntcPersonImg">
-        <div class="cntcPersonInfo">
-            <h1 class="cntcPersonName">${data[0].userName}</h1>
-            <p>Start a new chat</p>
-        </div>
-    `
-
-    container.appendChild(tatay);
+    createContact(userName);
 });
 
 /*====================================================================
