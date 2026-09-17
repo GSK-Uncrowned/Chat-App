@@ -197,16 +197,8 @@ signupForm.addEventListener('submit', async (e) => {
         },
     });
 
-    const esc = document.querySelectorAll('.esc');
-    const modal = document.querySelector('.modal');
-
-    esc.forEach((something) => {
-        something.addEventListener('click', () => {
-            modal.classList.toggle('hide');
-        });
-    });
-
     createContact(userName);
+    removeModal();
 });
 
 /*====================================================================
@@ -251,11 +243,15 @@ const acc = document.querySelector('.mrKhen').addEventListener('click', () => {
     modal.classList.toggle('hide');
 });
 
-esc.forEach((something) => {
-    something.addEventListener('click', () => {
-        modal.classList.toggle('hide');
+function removeModal() {
+    esc.forEach((something) => {
+        something.addEventListener('click', () => {
+            modal.classList.toggle('hide');
+        });
     });
-});
+}
+
+removeModal();
 
 const change = document.querySelectorAll('.link');
 change.forEach((something) => {
