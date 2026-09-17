@@ -14,8 +14,10 @@ async function initializeTheFuckingApp() {
     }
 }
 initializeTheFuckingApp();
-
 console.log(user);
+
+
+
 const output = document.querySelector('.outputSection');
 const container = document.querySelector('.cntcPeople');
 
@@ -193,6 +195,15 @@ signupForm.addEventListener('submit', async (e) => {
                 userName: userName,
             },
         },
+    });
+
+    const esc = document.querySelectorAll('.esc');
+    const modal = document.querySelector('.modal');
+
+    esc.forEach((something) => {
+        something.addEventListener('click', () => {
+            modal.classList.toggle('hide');
+        });
     });
 
     createContact(userName);
