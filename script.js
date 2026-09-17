@@ -1,9 +1,10 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 const supabaseClient = createClient('https://mflwqmpfqdwscyxkdpfi.supabase.co', "sb_publishable_JVvk1dxs_aY3JydW6N_JfQ_tKcf1_RG");
 
+const { data: { user } } = await supabaseClient.auth.getUser();
+
 async function initializeTheFuckingApp() {
 
-    const { data: { user } } = await supabaseClient.auth.getUser();
     const modal = document.querySelector('.modal');
     if (!user) {
         modal.classList.toggle('hide');
