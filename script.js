@@ -1,6 +1,20 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 const supabaseClient = createClient('https://mflwqmpfqdwscyxkdpfi.supabase.co', "sb_publishable_JVvk1dxs_aY3JydW6N_JfQ_tKcf1_RG");
 
+async function initializeTheFuckingApp() {
+
+    const { data: { user } } = await supabaseClient.auth.getUser();
+    const modal = document.querySelector('.modal');
+    if (!user) {
+        modal.classList.toggle('hide');
+        console.log("not logged in");
+
+        return;
+    }
+}
+initializeTheFuckingApp();
+
+console.log(user);
 const output = document.querySelector('.outputSection');
 const container = document.querySelector('.cntcPeople');
 
@@ -119,6 +133,8 @@ async function loadContacts(contactId) {
 }
 loadContacts();
 
+/*============================================================================*/
+
 const loginForm = document.querySelector('.logIn');
 const signupForm = document.querySelector('.signUp');
 
@@ -134,16 +150,26 @@ loginForm.addEventListener('submit', async (e) => {
     });
 });
 
-function createContact(name) {
+async function createContact(userName) {
     const tatay = document.createElement('div');
     tatay.className = "cntcPerson";
 
-    tatay.dataset.contactId = name;
+    const { data, error } = await supabaseClient
+        .from('contacts')
+        .insert([{ name: userName }])
+        .select();
+
+    if (error) {
+        alert('Error creating contact: ' + error.message);
+        return;
+    }
+
+    tatay.dataset.contactId = data[0].id;
 
     tatay.innerHTML = `
         <img src="assets/profile.svg" class="cntcPersonImg">
         <div class="cntcPersonInfo">
-            <h1 class="cntcPersonName">${name}</h1>
+            <h1 class="cntcPersonName">${data[0].name}</h1>
             <p>Start a new chat</p>
         </div>
     `
@@ -158,9 +184,14 @@ signupForm.addEventListener('submit', async (e) => {
     const email = signupForm.querySelector('.emailInput').value.trim();
     const password = signupForm.querySelector('.passwordInput').value.trim();
 
-    const { data, error } = await supabaseClient.auth.signUp({
+    const { data: authData, error: authError } = await supabaseClient.auth.signUp({
         email: email,
-        password: password
+        password: password,
+        options: {
+            data: {
+                userName: userName,
+            },
+        },
     });
 
     createContact(userName);
