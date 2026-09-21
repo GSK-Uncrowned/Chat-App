@@ -28,8 +28,11 @@ function scrollOutputToBottom() {
 }
 
 /*====================================================================
-   Load messages from Supabase and display them in the output section 
+   Load messages and Send messages to and from the Supabase database
   ====================================================================*/
+
+  /*======================[ Load Messages ]====================*/
+
 async function loadMessages(contactId) {
     output.innerHTML = '';
     const { data: messages, error } = await supabaseClient
@@ -55,10 +58,8 @@ async function loadMessages(contactId) {
     scrollOutputToBottom();
 }
 
+/*======================[ Send Messages ]====================*/
 
-/*====================================================================
-   Function to send a message and insert it into the Supabase database
-  ====================================================================*/
 async function sendMessage() {
     if (!activeContact) {
         alert('Please select a contact first.');
@@ -93,6 +94,9 @@ document.querySelector('.inputSection input').addEventListener('keydown', (e) =>
     if (e.key === 'Enter') sendMessage();
 });
 
+/*====================================================================
+   Function to handle the like button click
+  ====================================================================*/
 document.querySelector('.likee').addEventListener('click', () => {
     const bubble = document.createElement('div');
     bubble.className = 'outgoing';
@@ -105,8 +109,11 @@ document.querySelector('.likee').addEventListener('click', () => {
 
 
 /*==============================================================================
-   Function to display the contact name and profile picture in the contact list
+    Load contacts and Create new contacts
   ==============================================================================*/
+
+  /*======================[ Load Contacts ]====================*/
+
 async function loadContacts(contactId) {
     const { data, error } = await supabaseClient
         .from('contacts')
@@ -136,22 +143,7 @@ async function loadContacts(contactId) {
 }
 loadContacts();
 
-/*============================================================================*/
-
-const loginForm = document.querySelector('.logIn');
-const signupForm = document.querySelector('.signUp');
-
-loginForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = loginForm.querySelector('.emailInput').value.trim();
-    const password = loginForm.querySelector('.passwordInput').value.trim();
-
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password,
-    });
-});
+/*======================[ Create Contacts ]====================*/
 
 async function createContact(userName) {
     const tatay = document.createElement('div');
@@ -159,7 +151,10 @@ async function createContact(userName) {
 
     const { data, error } = await supabaseClient
         .from('contacts')
-        .insert([{ name: userName }])
+        .insert([{
+            name: userName,
+            id: user.id
+        }])
         .select();
 
     if (error) {
@@ -180,6 +175,44 @@ async function createContact(userName) {
     container.appendChild(tatay);
 }
 
+/*====================================================================
+    Handle login and signup form submissions
+  ====================================================================*/
+
+/*======================[ LogIn ]====================*/
+
+const loginForm = document.querySelector('.logIn');
+const signupForm = document.querySelector('.signUp');
+
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = loginForm.querySelector('.emailInput').value.trim();
+    const password = loginForm.querySelector('.passwordInput').value.trim();
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password,
+    });
+
+    if (error) {
+        alert('Error logging in: ' + error.message);
+        return;
+    }
+
+    if (!data) {
+        alert('Error logging in: No data returned');
+        return;
+    }
+
+    document.querySelector('.emailInput').value = '';
+    document.querySelector('.passwordInput').value = '';
+
+    modal.classList.toggle('hide');
+});
+
+/*======================[ SignUp ]====================*/
+
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -197,12 +230,27 @@ signupForm.addEventListener('submit', async (e) => {
         },
     });
 
+    if (authError) {
+        alert('Error creating user: ' + authError.message);
+        return;
+    }
+
+    if (!authData) {
+        alert('Error creating user: No data returned');
+        return;
+    }
+
     createContact(userName);
-    removeModal();
+
+    document.querySelector('.userInput').value = '';
+    document.querySelector('.emailInput').value = '';
+    document.querySelector('.passwordInput').value = '';
+
+    modal.classList.toggle('hide');
 });
 
 /*====================================================================
-                 Highlighting the selected contact
+    Highlighting the selected contact
 ====================================================================*/
 document.querySelector('.cntcPeople').addEventListener('click', (e) => {
     const contact = e.target.closest('.cntcPerson');
@@ -226,13 +274,15 @@ document.querySelector('.cntcPeople').addEventListener('click', (e) => {
 
 
 /*====================================================================
-   Toggle the visibility of the new chat form and the right panel
+   Toggle functions
   ====================================================================*/
 
 document.querySelector('.actionInfo').addEventListener('click', () => {
     const rightPanel = document.querySelector('.info');
     rightPanel.classList.toggle('show');
 });
+
+/*==============================[ Modal ]==================================*/
 
 const esc = document.querySelectorAll('.esc');
 const modal = document.querySelector('.modal');
