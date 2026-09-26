@@ -153,7 +153,6 @@ async function createContact(userName) {
         .from('contacts')
         .insert([{
             name: userName,
-            id: user.id
         }])
         .select();
 
