@@ -261,8 +261,10 @@ document.querySelector('.cntcPeople').addEventListener('click', (e) => {
     });
 
     const contactName = contact.querySelector('.cntcPersonName').textContent;
-    const nameOutput = document.querySelector('.nameOutput');
-    nameOutput.textContent = contactName;
+    const nameOutput = document.querySelectorAll('.nameOutput');
+    nameOutput.forEach((name) => {
+        name.textContent = contactName;
+    });
 
     contact.classList.add('active');
 

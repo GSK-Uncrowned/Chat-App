@@ -404,6 +404,10 @@ body {
     background-color: #3A3B3C;
 }
 
+#infoName {
+    font-size: 30px;
+    font-weight: 700;
+}
 
 
 
@@ -411,77 +415,7 @@ body {
    8. MODALS
    ========================================================================== */
 
-
-/* ===========================================
-   /modals / join chat modal
-   =========================================== */
-.hider {
-    display: none;
-}
-
-.hider.show {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.35);
-}
-
-.joinChat {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #3A3B3C;
-    padding: 16px;
-    border-radius: 16px;
-}
-
-.joinChat input {
-    background-color: #1e1e1e;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-}
-
-.joinChat button {
-    background-color: #1e1e1e;
-    border: none;
-    outline: none;
-    color: rgb(197, 197, 197);
-    padding: 8px 12px;
-    border-radius: 8px;
-    margin-left: 8px;
-}
-
-.joinChat button:hover {
-    background-color: #2e2e2e;
-    cursor: pointer;
-}
-
-.closeButton {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    margin-left: 0;
-    width: 22px;
-    height: 22px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
-}
-
-
-
-/* ==============================================
-   /modals /auth modal
-   ============================================== */
+/* ====================[ /modals /auth modal ]======================= */
 
 .modal {
     position: fixed;
@@ -563,9 +497,7 @@ body {
     cursor: pointer;
 }
 
-/* ==========================
-   /modals /auth /mac larp
-   ========================== */
+/* =======================[ /modals /auth /mac larp ]========================= */
 .cntrl {
     display: flex;
     gap: 8px;
