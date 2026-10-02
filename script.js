@@ -129,7 +129,7 @@ async function loadContacts(contactId) {
         const tatay = document.createElement('div');
         tatay.className = "cntcPerson";
 
-        tatay.dataset.contactId = contact.id;
+        tatay.dataset.contactId = contact.user_id;
 
         tatay.innerHTML = `
         <img src="assets/profile.svg" class="cntcPersonImg">
@@ -162,7 +162,9 @@ async function createContact(userName, userId) {
         return;
     }
 
-    tatay.dataset.contactId = data[0].id;
+    const newContact = data[0];
+
+    tatay.dataset.contactId = newContact.user_id;
 
     tatay.innerHTML = `
         <img src="assets/profile.svg" class="cntcPersonImg">
