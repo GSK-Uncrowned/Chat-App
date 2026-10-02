@@ -145,7 +145,7 @@ loadContacts();
 
 /*======================[ Create Contacts ]====================*/
 
-async function createContact(userName) {
+async function createContact(userName, userId) {
     const tatay = document.createElement('div');
     tatay.className = "cntcPerson";
 
@@ -153,6 +153,7 @@ async function createContact(userName) {
         .from('contacts')
         .insert([{
             name: userName,
+            user_id: userId
         }])
         .select();
 
@@ -229,6 +230,8 @@ signupForm.addEventListener('submit', async (e) => {
         },
     });
 
+    const userId = authData?.user?.id;
+
     if (authError) {
         alert('Error creating user: ' + authError.message);
         return;
@@ -239,7 +242,7 @@ signupForm.addEventListener('submit', async (e) => {
         return;
     }
 
-    createContact(userName);
+    createContact(userName, userId);
 
     document.querySelector('.userInput').value = '';
     document.querySelector('.emailInput').value = '';
